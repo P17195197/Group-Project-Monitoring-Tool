@@ -8,7 +8,7 @@ $('#send-message').on('click', function() {
 
 function onReceiverRoleSelect(){
     var roleId = $("#receiverrole").find(":selected").val();
-    console.log(roleId);
+
     var input = {
             function_name: 'get_users',
             user_role_id: parseFloat(roleId)
@@ -99,4 +99,4 @@ function getMessages() {
 
 $(document).ready(function () {
     getMessages();
-})
+});

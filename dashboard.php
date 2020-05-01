@@ -3,9 +3,11 @@
 	session_start();
 	require('config.php');
 	require('helpers/auth.php');
-	require('./helpers/render_helpers.php');
-
+	require('./render_helpers.php');
+    require ('./database/message.php');
     $user = check_auth();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +64,7 @@
             </table>
         </div>
 
-        <div class="col-md-6 col-lg-6"> <h4>Talk to people from your university</h4>
+        <div class="col-md-6 col-lg-6"> <h4>Talk to people from your institution</h4>
           <form id="contact-students" method="post" action="messages.php" role="form" novalidate="true">
 
               <div class="messages"></div>
@@ -135,6 +137,27 @@
   </div>
 
 
-<?=render_footer(); ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Uni Project</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="./vendor/jquery/jquery.min.js"></script>
+<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="./js/scrolling-nav.js"></script>
+<script src="./js/jquery.dataTables.min.js"></script>
+
+<script src="./js/scripts.js"></script>
+
 </body>
 </html>

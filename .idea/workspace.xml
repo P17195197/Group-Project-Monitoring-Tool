@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8cf932a8-3fc8-4896-98ca-6fa1f72af3db" name="Default Changelist" comment="" />
+    <list default="true" id="8cf932a8-3fc8-4896-98ca-6fa1f72af3db" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/articles.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/message.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helpers/actions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/articles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/render_helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/render_helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scripts.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,8 +28,12 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1W8qEHDmzdlg9jpY9LdY4eaFzbL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -33,6 +46,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\RaviKiran\Downloads\ABoogie\Deliverables\Website" />
       <recent name="C:\Users\RaviKiran\Downloads\ABoogie\Deliverables\Website\helpers" />
     </key>
   </component>
@@ -103,7 +117,8 @@
       <workItem from="1585132174268" duration="198000" />
       <workItem from="1585132466885" duration="5294000" />
       <workItem from="1588314534512" duration="143000" />
-      <workItem from="1588314703930" duration="721000" />
+      <workItem from="1588314703930" duration="2312000" />
+      <workItem from="1588319760242" duration="4006000" />
     </task>
     <servers />
   </component>
@@ -119,14 +134,18 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1585137791359" />
-    <state x="477" y="265" key="NewPhpFileDialog" timestamp="1585135411751">
+    <state x="477" y="265" key="NewPhpFileDialog" timestamp="1588319845642">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="477" y="265" key="NewPhpFileDialog/0.0.1280.680@0.0.1280.680" timestamp="1585135411751" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1588314720631">
+    <state x="477" y="265" key="NewPhpFileDialog/0.0.1280.680@0.0.1280.680" timestamp="1588319845642" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1588319761269">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588314720631" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588319761269" />
+    <state x="0" y="0" width="742" height="680" key="find.popup" timestamp="1588320860825">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="0" width="742" height="680" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1588320860825" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1585134347185">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
