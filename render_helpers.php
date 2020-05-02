@@ -1,7 +1,7 @@
 <?php
 
 function render_navbar($user_role){
-    $rootPath =   explode('/',  $_SERVER['SERVER_NAME'])[1];
+    $rootPath =  './'; // explode('/',  $_SERVER['SERVER_NAME'])[1];
     if($user_role == "Tutor"){
         return '<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
                     <div class="container">

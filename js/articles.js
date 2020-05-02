@@ -21,7 +21,17 @@ function getArticles(){
         dataType:'json',
         data: (articleInput),
         success: function(data) {
-            console.log(data);
+            $('#article-table').DataTable( {
+                "data": data,
+                "columns": [
+                    { "data": "authorName" },
+                    { "data": "title" },
+                    { "data": "createdDate" }//,
+                    // { "data": "content", "visible": "false" },
+                    // { "data": "id", "visible": "false" },
+                    // { "data": "authorId", "visible": "false" },
+                ]
+            } );
         },
         error: function (error) {
          console.log(error);

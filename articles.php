@@ -19,6 +19,8 @@ $user = check_auth ();
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/scrolling-nav.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+<!--    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <style type="text/css">
     .result {
@@ -34,8 +36,22 @@ $user = check_auth ();
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
-<div class="container">
-    <div class="row p-5 <?php if($user["roleName"] != "Tutor") { echo "invisible"; } ?>">
+<div class="container article-publish">
+    <div class="row p-5">
+        <div class="col-md-12 col-lg-12"> <h4>Articles</h4>
+            <table id="article-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Published on</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+    <div class="row p-5  <?php if($user["roleName"] != "Tutor") { echo "invisible"; } ?>">
 
         <div class="col-md-6 col-lg-6"><h4>Publish new article</h4>
             <form id="publish-article" name="publish-article" method="post" action="articles.php" role="form" novalidate="true">
