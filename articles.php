@@ -38,7 +38,7 @@ $user = check_auth ();
     <div class="row p-5">
 
         <div class="col-md-6 col-lg-6"><h4>Publish new article</h4>
-            <form id="publish-article" method="post" action="articles.php" role="form" novalidate="true">
+            <form id="publish-article" name="publish-article" method="post" action="articles.php" role="form" novalidate="true">
                 <div class="articles"></div>
                 <div class="controls">
                     <div class="row">
@@ -69,7 +69,7 @@ $user = check_auth ();
 
                         <div class="col-md-12 pt-2">
                             <div class="alert alert-success invisible" id="message-status-success">
-                                <strong>Success!</strong> Your article is posted.</a>.
+                                <strong>Success!</strong> Your article is posted.</a>
                             </div>
                         </div>
                         <div class="col-md-12 pt-2">
@@ -120,7 +120,7 @@ $user = check_auth ();
 <!-- Custom JavaScript for this theme -->
 <script src="./js/scrolling-nav.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
-
+<script src="./js/common.js"></script>
 <script src="./js/articles.js"></script>
 
 </body>

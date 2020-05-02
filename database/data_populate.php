@@ -20,6 +20,11 @@ switch ($functionname){
     case 'get_messages':
         $messages = get_messages();
         echo json_encode($messages);
+    case 'post_article':
+        $title = $_POST["title"];
+        $content = $_POST["content"];
+        $article = post_article ($title, $content);
+        echo json_encode ($article);
     default:
         break;
 }
@@ -91,4 +96,28 @@ function get_messages(){
     }
     mysqli_close($conn);
     return $messages;
+}
+
+
+function post_article($title, $content){
+    $conn = get_new_connection();
+    $sql = "INSERT INTO `university_platform`.`articles`
+            (`authorId`, 
+            `title`, 
+            `content`, 
+            `createdDate`)
+            VALUES (" .
+                "'" . $_SESSION["id"] . "'," .
+                "'" . $title . "'," .
+                "'" . $content . "'," .
+                "NOW()" .
+                ")";
+
+    $inserted = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+
+    if($inserted != null){
+        return true;
+    }
+    return false;
 }

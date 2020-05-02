@@ -157,6 +157,7 @@
 <script src="./js/scrolling-nav.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
 
+<script src="./js/common.js"></script>
 <script src="./js/scripts.js"></script>
 
 </body>
