@@ -26,6 +26,10 @@ function postArticle(){
         success: function(data) {
             if(data){
                 showSuccessAlert();
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
+
             }
         },
         error: function (error) {

@@ -69,7 +69,7 @@ $user = check_auth ();
 
                         <div class="col-md-12 pt-2">
                             <div class="alert alert-success invisible" id="message-status-success">
-                                <strong>Success!</strong> Your article is posted.</a>
+                                <strong>Success!</strong> Your article is posted. Refreshing the page now...</a>
                             </div>
                         </div>
                         <div class="col-md-12 pt-2">
