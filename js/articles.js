@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    getArticles();
     $('#article-title').keyup(function(event){
         $('#article-title-preview').text(this.value);
     });
@@ -6,10 +7,27 @@ $(document).ready(function () {
         $('#article-content-preview').text(this.value);
     });
     $('#post-article').click(function(){
-        console.log('Article being posted');
         postArticle();
     })
 });
+
+function getArticles(){
+    var articleInput = {
+        function_name: 'get_articles'
+    };
+    $.ajax({
+        url: 'database/data_populate.php',
+        type: "POST",
+        dataType:'json',
+        data: (articleInput),
+        success: function(data) {
+            console.log(data);
+        },
+        error: function (error) {
+         console.log(error);
+        }
+    });
+}
 
 function postArticle(){
     var input = {
@@ -35,6 +53,5 @@ function postArticle(){
         error: function (error) {
             showFailureAlert();
         }
-
     });
 }

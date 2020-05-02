@@ -20,11 +20,17 @@ switch ($functionname){
     case 'get_messages':
         $messages = get_messages();
         echo json_encode($messages);
+        break;
+    case 'get_articles':
+        $articles = get_articles ();
+        echo json_encode ($articles);
+        break;
     case 'post_article':
         $title = $_POST["title"];
         $content = $_POST["content"];
         $article = post_article ($title, $content);
         echo json_encode ($article);
+        break;
     default:
         break;
 }
@@ -120,4 +126,22 @@ function post_article($title, $content){
         return true;
     }
     return false;
+}
+
+function get_articles(){
+    $articles = array();
+    $conn = get_new_connection();
+    $sql = "SELECT a.*, u.firstName, u.lastName FROM articles a
+	        INNER JOIN user u ON a.authorId = u.id";
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $articles[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $articles;
 }
