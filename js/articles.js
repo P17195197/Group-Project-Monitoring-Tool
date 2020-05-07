@@ -8,7 +8,8 @@ $(document).ready(function () {
     });
     $('#post-article').click(function(){
         postArticle();
-    })
+    });
+
 });
 
 function getArticles(){
@@ -21,17 +22,24 @@ function getArticles(){
         dataType:'json',
         data: (articleInput),
         success: function(data) {
+            console.log(data);
             $('#article-table').DataTable( {
                 "data": data,
                 "columns": [
                     { "data": "authorName" },
                     { "data": "title" },
-                    { "data": "createdDate" }//,
-                    // { "data": "content", "visible": "false" },
-                    // { "data": "id", "visible": "false" },
-                    // { "data": "authorId", "visible": "false" },
+                    { "data": "createdDate" },
+                    { "data": "content", "visible": false },
+                    { "data": "id", "visible": false },
+                    { "data": "authorId",  "visible": false },
                 ]
             } );
+            $('#article-table').on('click', 'tbody tr', function () {
+                var table = $('#article-table').DataTable();
+                var row = table.row($(this)).data();   //full row of array data
+                $("#article-select-title").text(row["title"]);
+                $("#article-select-content").text(row["content"]);
+            });
         },
         error: function (error) {
          console.log(error);

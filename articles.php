@@ -38,16 +38,34 @@ $user = check_auth ();
 
 <div class="container article-publish">
     <div class="row p-5">
-        <div class="col-md-12 col-lg-12"> <h4>Articles</h4>
+        <div class="col-md-6 col-lg-6"> <h4>Articles</h4>
             <table id="article-table" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                     <th>Author</th>
                     <th>Title</th>
                     <th>Published on</th>
+                    <th>Content</th>
+                    <th>Id</th>
+                    <th>Author Id</th>
                 </tr>
                 </thead>
             </table>
+        </div>
+        <div class="col-md-6 col-lg-6"> 
+            <div id="#article-select">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 id="article-select-title"></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="article-select-content"></span>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </div>
