@@ -1,5 +1,6 @@
 <?php
 require ('dbconfig.php');
+require ('chat_helpers.php');
 
 /* Method to login with a username and password */
 function login($username, $password){
@@ -12,8 +13,8 @@ function login($username, $password){
             while($row = mysqli_fetch_assoc($result)) {
                 if($row["password"] == md5($password)){
                     $user = $row;
-                    mysqli_close($conn);
-                    return $user;
+                    update_online_status($conn, $username, 1);
+                    break;
                 }
             }
         }
@@ -72,4 +73,9 @@ function register($username, $password, $firstname, $lastname, $emailaddress, $p
     }
     mysqli_close($conn);
     return $user;
+}
+
+function logout($username){
+    $conn = get_new_connection();
+    update_online_status($conn, $username, 0);
 }

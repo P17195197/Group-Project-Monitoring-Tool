@@ -19,6 +19,9 @@
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/scrolling-nav.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <style type="text/css">
 	.result {
@@ -43,27 +46,80 @@
 
   <div class="container">
     <div class="row p-5">
-        <div class="col-md-6 col-lg-6"> <h4>Your message history</h4>
-            <table id="messagehistory" class="display" style="width:100%">
+        <div class="col-md-6 col-lg-6 chat-contacts"> <h4>Your message history</h4>
+            <input type="hidden" id="current-user" value="<?php echo ($_SESSION["user_id"])?>">
+            <input type="hidden" id="current-user-id" value="<?php echo ($_SESSION["id"])?>">
+            <input type="hidden" id="selected-user">
+            <input type="hidden" id="selected-user-id">
+
+            <table id="contact-users" class="display" style="width:100%">
                 <thead>
                 <tr>
-                    <th>Receiver</th>
-                    <th>Time</th>
-                    <th>Subject</th>
-                    <th>Content</th>
+                    <th>User</th>
+                    <th>Id</th>
+                    <th>Message</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Receiver</th>
-                    <th>Time</th>
-                    <th>Subject</th>
-                    <th>Content</th>
+                    <th>User</th>
+                    <th>Id</th>
+                    <th>Message</th>
                 </tr>
                 </tfoot>
             </table>
         </div>
 
+        <div id="incoming-message-template" class="hidden">
+            <div class="row incoming-message" id="message-{message_id}">
+                <div class="col-1">
+                    <div class="incoming-message-avatar">
+                        <img src="./images/user-profile.png" alt="{username}">
+                    </div>
+                </div>
+                <div class="col-11 incoming-message-text">
+                    <div class="incoming-message-span">
+                        <p>{message-text}</p>
+                        <span class="message-time">
+                                {message-time}
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="outgoing-message-template" class="hidden">
+            <div class="row outgoing-message" id="message-{message_id}">
+                <div class="col-11 outgoing-message-text">
+                    <div class="outgoing-message-span">
+                        <p>{message-text}</p>
+                        <span class="message-time">
+                                {message-time}
+                            </span>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="outgoing-message-avatar hidden">
+                        <img src="./images/user-profile.png" alt="{username}">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="chat-window">
+                <div id="chat-window">
+
+                </div>
+            </div>
+            <div class="chat-type">
+                <div class="input-message">
+                    <input type="text" class="write-message" id="chat-message-input" placeholder="Write your message">
+                    <button type="button" id="chat-send-message" class="send-button">
+                        <i class="fa fa-paper-plane-o"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6 col-lg-6"> <h4>Talk to people from your institution</h4>
           <form id="contact-students" method="post" action="messages.php" role="form" novalidate="true">
 
@@ -134,6 +190,7 @@
           </form>
       </div>
     </div>
+
   </div>
 
 

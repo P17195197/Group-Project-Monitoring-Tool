@@ -8,6 +8,10 @@ switch ($functionname){
         $users = get_users($_POST['user_role_id']);
         echo json_encode($users);
         break;
+    case 'get_contacted_users':
+        $contacts = get_contacted_users ();
+        echo  json_encode ($contacts);
+        break;
     case 'send_message':
         $senderid = $_SESSION['user']['id'];
         $receiverid = $_POST['receiverid'];
@@ -18,7 +22,8 @@ switch ($functionname){
 //        echo json_encode(print_r($message));
         break;
     case 'get_messages':
-        $messages = get_messages();
+        $user_id = $_POST["user_id"];
+        $messages = get_messages($user_id);
         echo json_encode($messages);
         break;
     case 'get_articles':
@@ -56,6 +61,35 @@ function get_users($userroleId){
     return $users;
 }
 
+function get_contacted_users(){
+    $contacts = array();
+    $conn = get_new_connection();
+    $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS contactName, 
+                    u.id,
+                    u.username, 
+                    u.avatar, 
+                    u.onlineStatus 
+            FROM user u WHERE id IN (
+                SELECT DISTINCT userId FROM 
+                (
+                    SELECT DISTINCT senderId AS userId FROM messages WHERE senderId = " . $_SESSION["id"] . " OR receiverId = " . $_SESSION["id"] . "
+                    UNION
+                    SELECT DISTINCT receiverId AS userId FROM messages WHERE senderId = " . $_SESSION["id"] . " or receiverId = " . $_SESSION["id"] . "
+                ) distinctUsers
+                WHERE userId <> " . $_SESSION["id"] .
+            ");";
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $contacts[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $contacts;
+}
 function send_message($senderid, $receiverid, $subject, $content){
     $message = null;
     $conn = get_new_connection();
@@ -84,13 +118,15 @@ function send_message($senderid, $receiverid, $subject, $content){
     return $message;
 }
 
-function get_messages(){
+function get_messages($user_id){
     $messages = array();
     $conn = get_new_connection();
-    $sql = "SELECT m.*, u2.username AS receiver FROM messages m 
-            INNER JOIN user u ON u.id = m.senderId 
-            INNER JOIN user u2 ON u2.id = m.receiverId
-            WHERE m.senderId = " . $_SESSION['id']  ;
+    $sql = "SELECT m.*, u1.username AS sender, u2.username AS receiver FROM messages m
+                INNER JOIN user u1 ON u1.id = m.senderId
+                INNER JOIN user u2 ON u2.id = m.receiverId
+            WHERE (m.senderId = " . $user_id . " and m.receiverId = " . $_SESSION["id"] . ")
+                OR (m.senderId = " . $_SESSION["id"] . " and m.receiverId = " . $user_id .")
+            ORDER BY m.sentTime ASC;";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
