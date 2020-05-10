@@ -487,6 +487,37 @@ iframe {
   padding: 0px 0px 0px 12px;
 }
 
+.lead{
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #fff;
+}
+
+.chat-recent{
+  padding: 10px 29px 10px 20px;
+  overflow: hidden;
+}
+
+.chat-recent-heading{
+  float: left;
+  width: 40%;
+}
+
+.chat-recent-heading h4{
+  color: #05728f;
+  font-size: 21px;
+  margin: auto;
+}
+
+.chat-area{
+  border: 1px solid #dddddd;
+  width: 100%;
+  padding: 0;
+}
+
+.chat-box{
+  padding: 0;
+}
 .write-message{
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: medium none;
@@ -494,6 +525,7 @@ iframe {
   font-size: 15px;
   min-height: 48px;
   width: 100%;
+  padding-right: 60px;
 }
 
 .send-button{
@@ -528,6 +560,40 @@ iframe {
   padding: 5px 10px 5px 12px;
   width: 100%;
 }
+
+.chat-contact{
+  max-width: 72px;
+}
+
+.last-message-date{
+  float: right;
+  font-size: 12px;
+}
+
+.chat-preview{
+  font-size: 14px;
+  color: #989898;
+  margin: auto;
+}
+
+.chat-contact-item{
+  border: 1px solid #ddd;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.chat-contact-item:hover{
+  background: #eeeeee;
+}
+
+.selected-contact{
+  background: #eeeeee;
+}
+
+.chat-contact img {
+  max-width: 100%;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 

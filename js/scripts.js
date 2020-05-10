@@ -7,9 +7,9 @@ $('#send-message').on('click', function() {
 });
 
 function onReceiverRoleSelect(){
-    var roleId = $("#receiverrole").find(":selected").val();
+    let roleId = $("#receiverrole").find(":selected").val();
 
-    var input = {
+    let input = {
             function_name: 'get_users',
             user_role_id: parseFloat(roleId)
         };
@@ -22,7 +22,7 @@ function onReceiverRoleSelect(){
         success: function(data) {
             console.log(data);
             $("#receivinguser").empty();
-            var listitems = '';
+            let listitems = '';
             $.each(data, function(key, value){
                 listitems += '<option value="' + value.id + '">' + value.username + '</option>';
             });
@@ -33,11 +33,11 @@ function onReceiverRoleSelect(){
 }
 
 function onSendMessage() {
-    var receiverId = $("#receivinguser").find(":selected").val();
-    var subject = $("#messagesubject").val();
-    var content = $("#form_message").val();
+    let receiverId = $("#receivinguser").find(":selected").val();
+    let subject = $("#messagesubject").val();
+    let content = $("#form_message").val();
 
-    var input = {
+    let input = {
         function_name: 'send_message',
         receiverid: parseFloat(receiverId),
         subject: subject,
@@ -62,7 +62,7 @@ function onSendMessage() {
 }
 
 function getContacts() {
-    var input = {
+    let input = {
         function_name: 'get_contacted_users'
     };
     $.ajax({    //create an ajax request to display.php
@@ -71,32 +71,47 @@ function getContacts() {
         dataType:'json', // add json datatype to get json
         data: (input),
         success: function(data) {
-            $('#contact-users').DataTable( {
-                "data": data,
-                "columns": [
-                    { "data": "contactName" },
-                    { "data": "id", visible: false },
-                    { "data": "onlineStatus",
-                        "render": function ( data, type, row ) {
-                            return data === "1" ? 'Online': 'Offline';
-                        },
-                    }
-                ]
-            } );
-            $('#contact-users').on('click', 'tbody tr', function () {
-                var table = $('#contact-users').DataTable();
-                var row = table.row($(this)).data();   //full row of array data
-                $("#selected-user").val(row["username"]);
-                $("#selected-user-id").val(row["id"]);
-                getMessages(row["id"])
-            });
+            renderContacts(data);
         }
 
     });
 }
 
+function renderContacts(contacts){
+    let contactListHtml = '';
+    $('#contact-list').html('');
+    let currentUser = $('#current-user').val();
+    console.log('Contacts are', contacts);
+    contacts.forEach(contact => {
+        let contactTemplate = $('#chat-contact-template').html();
+        contactTemplate = contactTemplate.replace(/{user-id}/g, contact['id']);
+        contactTemplate = contactTemplate.replace(/{contact-username}/g, contact['contactName']);
+        contactTemplate = contactTemplate.replace(/{contact-name}/g, contact['contactName']);
+        contactTemplate = contactTemplate.replace(/{last-message-time}/g, dateFormatter(contact['sentTime']));
+        contactTemplate = contactTemplate.replace(/{last-message}/g,contact['content']);
+        contactListHtml += contactTemplate;
+    });
+    $('#contact-list').html(contactListHtml);
+    $('.chat-contact-item').on('click', function() {
+        let contactId = this.id.replace("contact-",'');
+        $('#selected-user-id').val(contactId);
+        highlightSelectedUser(contactId);
+        getMessages(contactId);
+    });
+
+    //default load. select latest user
+    $('#selected-user-id').val(contacts[0]["id"]);
+    highlightSelectedUser(contacts[0]["id"]);
+    getMessages(contacts[0]["id"]);
+}
+
+function highlightSelectedUser(userId){
+    $('.chat-contact-item').removeClass('selected-contact');
+    $('#contact-'+userId).addClass('selected-contact');
+}
+
 function getMessages(userId) {
-    var input = {
+    let input = {
         function_name: 'get_messages',
         user_id: userId
     };
@@ -106,8 +121,6 @@ function getMessages(userId) {
         dataType:'json', // add json datatype to get json
         data: (input),
         success: function(data) {
-            console.log(data);
-            $("#chat-window").html('');
             renderMessages(data);
         }
 
@@ -117,17 +130,17 @@ function getMessages(userId) {
 function dateFormatter(strDate) {
     const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let current_datetime = new Date(strDate)
-    let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + '|' + current_datetime.toLocaleTimeString();
+    let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + ' | ' + current_datetime.toLocaleTimeString();
     return formatted_date;
 }
 
 function renderMessages(messages){
-    var chatWindowHtml = '';
-    var currentUser = $('#current-user').val();
+    let chatWindowHtml = '';
+    let currentUser = $('#current-user').val();
     messages.forEach(message => {
         if (message["sender"] === currentUser){
             //load outgoing message
-            var outgoingTemplate = $('#outgoing-message-template').html();
+            let outgoingTemplate = $('#outgoing-message-template').html();
             outgoingTemplate = outgoingTemplate.replace(/{message_id}/g, message['id']);
             outgoingTemplate = outgoingTemplate.replace(/{username}/g, message['sender']);
             outgoingTemplate = outgoingTemplate.replace(/{message-text}/g, message['content']);
@@ -136,7 +149,7 @@ function renderMessages(messages){
             chatWindowHtml += outgoingTemplate;
         }else{
             //load incoming message
-            var incomingTemplate = $('#incoming-message-template').html();
+            let incomingTemplate = $('#incoming-message-template').html();
             incomingTemplate = incomingTemplate.replace(/{message_id}/g, message['id']);
             incomingTemplate = incomingTemplate.replace(/{username}/g, message['sender']);
             incomingTemplate = incomingTemplate.replace(/{message-text}/g, message['content']);
@@ -146,16 +159,16 @@ function renderMessages(messages){
         }
     });
     $('#chat-window').html(chatWindowHtml);
-    // var myDiv = $('.chat-window');
+    // let myDiv = $('.chat-window');
     $('.chat-window').scrollTop($('.chat-window')[0].scrollHeight - $('.chat-window')[0].clientHeight);
 }
 
 function sendChatMessage(){
-    var content = $('#chat-message-input').val();
-    var senderId = $('#current-user-id').val();
-    var receiverId = $('#selected-user-id').val();
+    let content = $('#chat-message-input').val();
+    let senderId = $('#current-user-id').val();
+    let receiverId = $('#selected-user-id').val();
 
-    var input = {
+    let input = {
         function_name: 'send_message',
         receiverid: parseFloat(receiverId),
         subject: '',
@@ -178,9 +191,8 @@ function sendChatMessage(){
 
 function refreshMessages(){
     setTimeout(function () {
-        console.log('Refreshing messages');
         getMessages($('#selected-user-id').val());
-        // refreshMessages();
+        refreshMessages();
     }, 3000);
 }
 

@@ -64,20 +64,35 @@ function get_users($userroleId){
 function get_contacted_users(){
     $contacts = array();
     $conn = get_new_connection();
-    $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS contactName, 
-                    u.id,
-                    u.username, 
-                    u.avatar, 
-                    u.onlineStatus 
-            FROM user u WHERE id IN (
-                SELECT DISTINCT userId FROM 
-                (
-                    SELECT DISTINCT senderId AS userId FROM messages WHERE senderId = " . $_SESSION["id"] . " OR receiverId = " . $_SESSION["id"] . "
-                    UNION
-                    SELECT DISTINCT receiverId AS userId FROM messages WHERE senderId = " . $_SESSION["id"] . " or receiverId = " . $_SESSION["id"] . "
-                ) distinctUsers
-                WHERE userId <> " . $_SESSION["id"] .
-            ");";
+    $sql = "SELECT 	u1.id,
+                    CONCAT(u1.firstName, ' ', u1.lastName) AS contactName,
+                    u1.username, 
+                    u1.avatar, 
+                    u1.onlineStatus,
+                    m.subject,
+                    m.content,
+                    m.sentTime,
+                    m.senderId,
+                    m.receiverId,
+                    m.status
+            FROM (SELECT DISTINCT userId FROM 
+                        (
+                           SELECT DISTINCT senderId AS userId 
+                           FROM messages 
+                           WHERE senderId = " . $_SESSION["id"] . " OR receiverId = " . $_SESSION["id"] . "
+                           UNION
+                           SELECT DISTINCT receiverId AS userId 
+                           FROM messages 
+                           WHERE senderId = " . $_SESSION["id"] . " or receiverId = " . $_SESSION["id"] . "
+                           ) distinctUsers
+                WHERE userId <> " . $_SESSION["id"] . ") u    
+                    INNER JOIN user u1 ON u1.id = u.userId
+                    INNER JOIN messages m ON 
+                        ((m.senderId = u.userId AND m.receiverId = " . $_SESSION["id"] . ") OR (m.senderId = " . $_SESSION["id"] . " AND m.receiverId = u.userId)) 
+                        AND m.sentTime = (	SELECT MAX(sentTime) FROM messages
+                                            WHERE (senderId = u.userId AND receiverId= " . $_SESSION["id"] . ") OR
+                                                (senderId = " . $_SESSION["id"] . " AND receiverId = u.userId)
+                                            )";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
