@@ -183,7 +183,8 @@ function get_articles(){
     $articles = array();
     $conn = get_new_connection();
     $sql = "SELECT a.*, CONCAT(u.firstName, ' ', u.lastName) AS authorName FROM articles a
-	        INNER JOIN user u ON a.authorId = u.id";
+	        INNER JOIN user u ON a.authorId = u.id
+	        ORDER BY createdDate DESC";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){

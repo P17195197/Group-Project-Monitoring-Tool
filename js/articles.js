@@ -12,6 +12,8 @@ $(document).ready(function () {
 
 });
 
+let allArticles = [];
+
 function getArticles(){
     var articleInput = {
         function_name: 'get_articles'
@@ -22,29 +24,64 @@ function getArticles(){
         dataType:'json',
         data: (articleInput),
         success: function(data) {
-            console.log(data);
-            $('#article-table').DataTable( {
-                "data": data,
-                "columns": [
-                    { "data": "authorName" },
-                    { "data": "title" },
-                    { "data": "createdDate" },
-                    { "data": "content", "visible": false },
-                    { "data": "id", "visible": false },
-                    { "data": "authorId",  "visible": false },
-                ]
-            } );
-            $('#article-table').on('click', 'tbody tr', function () {
-                var table = $('#article-table').DataTable();
-                var row = table.row($(this)).data();   //full row of array data
-                $("#article-select-title").text(row["title"]);
-                $("#article-select-content").text(row["content"]);
-            });
+            allArticles = data;
+            renderArticles(data);
         },
         error: function (error) {
          console.log(error);
         }
     });
+}
+
+function formatArticle(text){
+    if(text.length > 250){
+        return text.substr(0, 250) + "...";
+    }
+    return text;
+}
+
+function formatTitle(text){
+    if(text.length > 60){
+        return text.substr(0, 60) + "...";
+    }
+    return text;
+}
+
+function dateFormatter(strDate) {
+    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let current_datetime = new Date(strDate)
+    let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + ' | ' + current_datetime.toLocaleTimeString();
+    return formatted_date;
+}
+
+function renderArticles(articles){
+    let articlesHtml = '';
+    articles.forEach(article => {
+        let articleTemplate = $('#article-item-template').html();
+        articleTemplate = articleTemplate.replace(/{article-id}/g, article["id"]);
+        articleTemplate = articleTemplate.replace(/{article-title}/g, formatTitle(article["title"]));
+        articleTemplate = articleTemplate.replace(/{article-body}/g, formatArticle(article["content"]));
+        articleTemplate = articleTemplate.replace(/{article-author}/g, article["authorName"]);
+        articleTemplate = articleTemplate.replace(/{article-date}/g, dateFormatter(article["createdDate"]));
+        articlesHtml += articleTemplate;
+    });
+    $('#articles-list').html(articlesHtml);
+    $('.article-item').on('click', function () {
+        let articleId = this.id.replace("article-item-", "");
+        const article = allArticles.find(a => a["id"] === articleId);
+        $("#article-render-title").html(article["title"]);
+        $("#article-render-author").html(article["authorName"]);
+        $("#article-render-time").html(dateFormatter(article["createdDate"]));
+        $("#article-render-content").html(article["content"]);
+        $('html, body').animate({
+            scrollTop: $("#article-render").offset().top - 50
+        }, 200);
+    });
+    const defaultArticle = allArticles[0];
+    $("#article-render-title").html(defaultArticle["title"]);
+    $("#article-render-author").html(defaultArticle["authorName"]);
+    $("#article-render-time").html(dateFormatter(defaultArticle["createdDate"]));
+    $("#article-render-content").html(defaultArticle["content"]);
 }
 
 function postArticle(){

@@ -37,38 +37,23 @@ $user = check_auth ();
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
 <div class="container article-publish">
-    <div class="row p-5">
-        <div class="col-md-6 col-lg-6"> <h4>Articles</h4>
-            <table id="article-table" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Author</th>
-                    <th>Title</th>
-                    <th>Published on</th>
-                    <th>Content</th>
-                    <th>Id</th>
-                    <th>Author Id</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-md-6 col-lg-6"> 
-            <div id="#article-select">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h5 id="article-select-title"></h5>
+    <div class="row p-5 hidden">
+        <div id="article-item-template">
+            <div class="col-md-12 col-lg-12 article-item" id="article-item-{article-id}">
+                <div class="article-header">
+                    <h7>{article-title}</h7>
+                    <div class="author">
+                        <p class="author-name">{article-author}</p>
+                        <p class="article-date">{article-date}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <span id="article-select-content"></span>
-                    </div>
+                <div class="article-body">
+                    <p>{article-body}</p>
                 </div>
-
             </div>
         </div>
-
     </div>
+
     <div class="row p-5  <?php if($user["roleName"] != "Tutor") { echo "invisible"; } ?>">
 
         <div class="col-md-6 col-lg-6"><h4>Publish new article</h4>
@@ -132,6 +117,27 @@ $user = check_auth ();
 
         </div>
     </div>
+    <div class="row p-5">
+        <div class="col-3">
+            <div class="row" id="articles-list">
+            </div>
+        </div>
+        <div class="col-9" id="article-render">
+            <h4 id="article-render-title" class="article-title"></h4>
+            <div class="author-details">
+                <span class="author-name" id="article-render-author">
+
+                </span>
+                <span class="author-time" id="article-render-time">
+
+                </span>
+            </div>
+            <div id="article-render-content" class="pt-5 p-1"></div>
+        </div>
+
+    </div>
+
+
 </div>
 
 

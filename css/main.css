@@ -15,6 +15,10 @@
   src: url('../fonts/ubuntu/Ubuntu-Bold.ttf'); 
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
@@ -594,6 +598,68 @@ iframe {
   max-width: 100%;
 }
 
+.article-item{
+  margin-top: 40px;
+  border-left: 1px solid #eeee;
+  cursor: pointer;
+}
+
+.article-title{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  padding-top: 40px;
+}
+
+.author-name{
+  float: right;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.author-time{
+  font-weight: 600;
+  display: inline-block;
+}
+
+.author-details{
+  font-size: 13px;
+}
+.article-header{
+  border-bottom: none;
+  color: #363636;
+  font-size: .65rem;
+  font-weight: 600;
+  height: 4rem;
+}
+
+.article-body{
+  flex: 1 1 auto;
+  background: #eeeeee;
+  min-height: 260px;
+  max-height: 260px;
+  padding: 8px;
+  overflow-y: hidden;
+}
+
+.article-header h7{
+  float: left;
+  font-size: 12px;
+}
+
+.author {
+  font-size: 11px;
+  position: absolute;
+  top: 30px;
+  right: 16px;
+}
+
+.author p {
+  font-size: 11px;
+}
+
+.article-date{
+  font-size: 9px !important;
+}
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 
