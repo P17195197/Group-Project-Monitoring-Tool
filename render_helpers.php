@@ -12,7 +12,7 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./schedule.php">Schedules</a>
+                              <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
                           </li>
                             <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>

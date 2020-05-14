@@ -689,6 +689,30 @@ iframe {
 .test-publish{
   min-height: 600px;
 }
+
+.answer-radio{
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+}
+
+.modal-dialog{
+  margin-top: 75px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.choices-list{
+  list-style-type: square;
+  margin-left: 11px;
+  font-size: 12px;
+}
+
+.choices-list li{
+  list-style-type: square;
+
+}
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 

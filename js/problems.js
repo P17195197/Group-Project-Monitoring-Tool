@@ -1,0 +1,171 @@
+let testLength = 0;
+let allClasses = [];
+
+$(document).ready(function(){
+    getClasses();
+    $('#problem-class').html(mapClassesToOptions());
+    addProblem();
+
+    $('#problem-class').on('change', function(){
+        getAllProblems(this.value);
+    })
+
+    $('#add-question').on('click', function(){
+        addProblem();
+    });
+
+    $('#submit-form').on('click', function () {
+        submitForm();
+    });
+
+    getAllProblems($('#problem-class').val());
+
+});
+
+function addProblem(){
+    testLength++;
+
+    let questionTemplate = $('#test-question-template').html();
+    $('#test-questions').append(questionTemplate.replace(/{problem-id}/g, testLength));
+    $('#add-topic-' + testLength).on('click', function () {
+        let closestDiv = $('#choices-' + this.id.replace('add-topic-', ''));
+        let choiceTemplate = $('#choice-template').html().replace(/{problem-id}/g, testLength);
+        closestDiv.append(choiceTemplate);
+    });
+
+}
+
+function mapClassesToOptions(){
+    let optionsHtml = '';
+    allClasses.forEach(c => {
+        optionsHtml += `<option value="${c.id}">${c.className}</option>`;
+    });
+    return optionsHtml;
+}
+function submitForm(){
+    let postObject = {
+        classId: $('#problem-class').val(),
+        problems: []
+    };
+    
+    for(let i = 1; i <= testLength; i++){
+        let problem = {
+            statement: '',
+            choices: []
+        };
+        problem.statement = $('#add-problem-' + i).val();
+        $('#choices-' + i + ' .answer-choice').map(function() {
+            problem.choices.push({
+                choice: this.value,
+                isCorrect: $(this).closest('.row').find('.answer-radio').is(':checked') ? 1 : 0
+            });
+        });
+        postObject.problems.push(problem);
+    }
+
+    addProblems(postObject);
+}
+
+function addProblems(problems){
+    let input = {
+        function_name: 'add_problems',
+        problems: JSON.stringify(problems)
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: input,
+        async: false,
+        success: function(data) {
+            // allClasses = data;
+            console.log(data);
+        }
+
+    });
+}
+function getClasses(){
+    let input = {
+        function_name: 'get_classes'
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: (input),
+        async: false,
+        success: function(data) {
+            allClasses = data;
+        }
+
+    });
+}
+
+function getAllProblems(classId){
+    let input = {
+        function_name: 'get_problems',
+        classId: classId
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: (input),
+        async: false,
+        success: function(data) {
+            console.log('All problems', data);
+            let problemsTable = $('#problems-table').DataTable();
+            problemsTable.clear().destroy();
+            problemsTable = $('#problems-table').DataTable( {
+                "data": data,
+                "columns": [
+                    { "data": "userName" },
+                    { "data": "postedDate" },
+                    { "data": "statement", "render": function ( data, type, row ) {
+                            return data.length > 50 ? data.substr(0, 50) + '...': data;
+                        }, },
+                    { "data": "id", "render": function ( data, type, row ) {
+                            let buttonHtml = "<input type='button' class='btn btn-info show-problem' value='Show Full Problem'>";
+                            return buttonHtml;
+                        }, }
+                    // { "data": "id", "visible": "false" },
+                    // { "data": "authorId", "visible": "false" },
+                ]
+            } );
+
+            problemsTable.on('click', 'tr', function () {
+                let data = problemsTable.row( this ).data();
+                console.log('Clicked= on row', data);
+                $('#problem-statement-dialog').html(data['statement']);
+                getChoices(data['id']);
+                $("#dialog").modal({
+                    fadeDuration: 500,
+                    fadeDelay: 0.25
+                });
+            } );
+        }
+    });
+}
+
+function getChoices(problemId){
+    let input = {
+        function_name: 'get_choices',
+        problemId: problemId
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: (input),
+        async: false,
+        success: function(data) {
+            let choiceHtml = '<ul class="choices-list">';
+            data.forEach(choice => {
+                choiceHtml += '<li>' + choice['answer'] + '</li>';
+            });
+            choiceHtml += '</ul>'
+            $('#answer-choices-dialog').html(choiceHtml);
+        }
+
+    });
+}

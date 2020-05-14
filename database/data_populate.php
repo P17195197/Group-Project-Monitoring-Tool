@@ -45,6 +45,21 @@ switch ($functionname){
         $added_tests = add_tests($tests);
         echo json_encode ($added_tests);
         break;
+    case 'add_problems':
+        $problems = json_decode ($_POST['problems']);
+        $added_problems = add_problems($problems);
+        echo json_encode ($added_problems);
+        break;
+    case 'get_problems':
+        $class_id = $_POST["classId"];
+        $all_problems = get_problems($class_id);
+        echo json_encode ($all_problems);
+        break;
+    case 'get_choices':
+        $problem_id = $_POST['problemId'];
+        $choices = get_choices($problem_id);
+        echo json_encode ($choices);
+        break;
     default:
         break;
 }
@@ -164,6 +179,43 @@ function add_tests($tests){
     return $added;
 }
 
+function add_problems($problems){
+    //add problems
+    //add choices
+    $conn = get_new_connection();
+    $added = false;
+
+    foreach ($problems->problems as $problem){
+        $sql = "INSERT INTO problems(statement, classId, postedBy, postedDate) VALUES ("
+                . "'" . $problem->statement . "',"
+                . $problems->classId . ","
+                . $_SESSION['id'] . ","
+                . "'" . date('Y-m-d h:i:s') ."'"
+                . ");";
+        $inserted = mysqli_query($conn, $sql);
+        $problemId = mysqli_insert_id ($conn);
+        if($inserted != null){
+            $added = true;
+        }else{
+            $added = false;
+        }
+        foreach ($problem->choices as $choice ){
+            $choice_sql = "INSERT INTO answers(answer, isCorrect, problemId) VALUES ("
+                    . "'" . $choice->choice . "',"
+                    . $choice->isCorrect . ","
+                    . $problemId . ");";
+            $choice_inserted = mysqli_query($conn, $choice_sql);
+            if($choice_inserted != null){
+                $added = true;
+            }else{
+                $added = false;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $added;
+}
+
 function get_messages($user_id){
     $messages = array();
     $conn = get_new_connection();
@@ -244,4 +296,41 @@ function get_classes(){
     }
     mysqli_close($conn);
     return $classes;
+}
+
+function get_problems($class_id){
+    $problems = array();
+    $conn = get_new_connection();
+    $sql = "SELECT p.*, CONCAT(u.firstName, ' ', u.lastName) AS userName, c.className FROM problems p
+                INNER JOIN user u ON p.postedBy = u.id
+                INNER JOIN classes c ON c.id = p.classId
+            WHERE c.id = " . $class_id . ";";
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $problems[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $problems;
+}
+
+function get_choices($problem_id){
+    $choices = array();
+    $conn = get_new_connection();
+    $sql = "SELECT * FROM answers WHERE problemId = " . $problem_id . ";";
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $choices[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $choices;
 }
