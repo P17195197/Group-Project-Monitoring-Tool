@@ -12,6 +12,10 @@ switch ($functionname){
         $contacts = get_contacted_users ();
         echo  json_encode ($contacts);
         break;
+    case 'get_classes':
+        $classes = get_classes();
+        echo json_encode ($classes);
+        break;
     case 'send_message':
         $senderid = $_SESSION['user']['id'];
         $receiverid = $_POST['receiverid'];
@@ -35,6 +39,11 @@ switch ($functionname){
         $content = $_POST["content"];
         $article = post_article ($title, $content);
         echo json_encode ($article);
+        break;
+    case 'add_tests':
+        $tests = json_decode ($_POST['tests']);
+        $added_tests = add_tests($tests);
+        echo json_encode ($added_tests);
         break;
     default:
         break;
@@ -133,6 +142,28 @@ function send_message($senderid, $receiverid, $subject, $content){
     return $message;
 }
 
+function add_tests($tests){
+    $conn = get_new_connection();
+    $added = false;
+    foreach($tests as $test){
+        $sql = "INSERT INTO tests (testName, testDate, duration, classId, topics) VALUES("
+            . "'" . $test->testName . "',"
+            . "'" . date('Y-m-d',strtotime($test->testDate)) . "',"
+            . "'" . $test->testDuration . "',"
+            .  $test->classId . ","
+            . "'" . $test->topics . "'"
+            . ")";
+        $inserted = mysqli_query($conn, $sql);
+        if($inserted != null){
+            $added = true;
+        }else{
+            $added = false;
+        }
+    }
+    mysqli_close($conn);
+    return $added;
+}
+
 function get_messages($user_id){
     $messages = array();
     $conn = get_new_connection();
@@ -196,4 +227,21 @@ function get_articles(){
     }
     mysqli_close($conn);
     return $articles;
+}
+
+function get_classes(){
+    $classes = array();
+    $conn = get_new_connection();
+    $sql = "SELECT * FROM classes WHERE tutorId = " . $_SESSION["id"];
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $classes[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $classes;
 }

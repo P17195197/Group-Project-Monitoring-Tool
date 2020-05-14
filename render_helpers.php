@@ -18,7 +18,7 @@ function render_navbar($user_role){
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>
                           </li>
                             <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
+                              <a class="nav-link js-scroll-trigger" href="./tests.php">Tests</a>
                           </li>
                             <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./logout.php">Logout</a>

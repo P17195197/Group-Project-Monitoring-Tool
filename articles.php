@@ -76,7 +76,7 @@ $user = check_auth ();
                             <div class="form-group">
                                 <label for="article-content">Content *</label>
                                 <textarea id="article-content" name="article-content" class="form-control"
-                                          placeholder="Start writing..." rows="4" required="required"
+                                          placeholder="Start writing..." rows="8" required="required"
                                           data-error="Content cannot be empty"></textarea>
                                 <div class="help-block with-errors"></div>
                             </div>

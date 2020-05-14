@@ -660,6 +660,35 @@ iframe {
 .article-date{
   font-size: 9px !important;
 }
+
+.test-question-template{
+  width: 100%;
+}
+
+.test-add-answer{
+  padding-top: 4px;
+}
+
+.test-questions{
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.question-template{
+  padding: 16px;
+  margin: 12px;
+  border: 1px solid #eeee;
+}
+
+.question-template-radio{
+  width: 25px;
+  height: 25px;
+  margin: 8px;
+}
+
+.test-publish{
+  min-height: 600px;
+}
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 
