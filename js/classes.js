@@ -53,6 +53,7 @@ function renderClasses(allClasses){
                 }
             },
             { "data": "id",
+                "visible": $('#user-role').val() === 'System Admin' || 'Guest' ? false : true,
                 "render": function ( data, type, row ) {
                     let enrolmentHtml = "<input type='button' class='btn btn-info enrol-in-class' value='Join'>";
                     return row['enrolmentStatus'] === '1' ? 'Joined' : enrolmentHtml;

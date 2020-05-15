@@ -54,7 +54,7 @@ $user = check_auth ();
         </div>
     </div>
 
-    <div class="row p-5  <?php if($user["roleName"] != "Tutor") { echo "invisible"; } ?>">
+    <div class="row p-5  <?php if(($user["roleName"] != "Tutor") && ($user["roleName"] != "System Admin")) { echo "invisible"; } ?>">
 
         <div class="col-md-6 col-lg-6"><h4>Publish new article</h4>
             <form id="publish-article" name="publish-article" method="post" action="articles.php" role="form" novalidate="true">

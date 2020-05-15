@@ -47,7 +47,7 @@ $user = check_auth ();
                     <tr>
                         <th>Class Name</th>
                         <th>Students</th>
-                        <th>Join</th>
+                        <th class="<?php echo $_SESSION["roleName"] == 'System Admin' || 'Guest' ? "invisible" : "" ?>">Join</th>
                     </tr>
                     </thead>
                 </table>
