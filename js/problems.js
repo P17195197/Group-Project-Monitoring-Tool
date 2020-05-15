@@ -138,6 +138,7 @@ function getAllProblems(classId){
                 console.log('Clicked= on row', data);
                 $('#problem-statement-dialog').html(data['statement']);
                 getChoices(data['id']);
+                $('#dialog').addClass("hidden").removeClass('hidden');
                 $("#dialog").modal({
                     fadeDuration: 500,
                     fadeDelay: 0.25

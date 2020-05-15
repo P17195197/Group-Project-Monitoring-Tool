@@ -53,31 +53,28 @@ function renderClasses(allClasses){
                 }
             },
             { "data": "id",
-                "visible": $('#user-role').val() !== 'Student' ? false: true,
                 "render": function ( data, type, row ) {
-                    let enrolmentHtml = "<input type='button' class='btn btn-info enrol-in-class' value='Enrol'>";
-                    return enrolmentHtml;
+                    let enrolmentHtml = "<input type='button' class='btn btn-info enrol-in-class' value='Join'>";
+                    return row['enrolmentStatus'] === '1' ? 'Joined' : enrolmentHtml;
                 }
             }
         ]
     } );
 
-    classesTable.on('click', 'tr', function () {
-        let data = classesTable.row( this ).data();
+    classesTable.on('click', 'tr .show-students', function () {
+        let data = classesTable.row(  $(this).closest('tr') ).data();
         getStudents(data['id']);
         $('#class-name').html(data['className']);
         $('#student-div').addClass("hidden").removeClass("hidden");
-        // $('#problem-statement-dialog').html(data['statement']);
-        // getChoices(data['id']);
-        // $("#dialog").modal({
-        //     fadeDuration: 500,
-        //     fadeDelay: 0.25
-        // });
-    } );
+    });
+
+    classesTable.on('click', 'tr .enrol-in-class', function () {
+        let data = classesTable.row(  $(this).closest('tr') ).data();
+        enrolInClass($('#user-id').val(), data['id']);
+    });
 };
 
 function renderStudents(students){
-    console.log('Students', students);
     let studentsTable = $('#students-table').DataTable();
     studentsTable.clear().destroy();
     studentsTable = $('#students-table').DataTable( {
@@ -86,4 +83,37 @@ function renderStudents(students){
             { "data": "userName" }
         ]
     } );
+}
+function enrolInClass(studentId, classId){
+    let input = {
+        function_name: 'enrol_in_class',
+        classId: classId,
+        studentId: studentId
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: (input),
+        async: false,
+        success: function(data) {
+            showMessage(data);
+            getClasses();
+            getStudents(classId);
+        }
+    });
+}
+
+function showMessage(data){
+    if(data){
+        $('#message-status-success').addClass("invisible").removeClass("invisible");
+        setTimeout(function () {
+            $('#message-status-success').removeClass("invisible").addClass("invisible");
+        }, 3000);
+    }else{
+        $('#message-status-failure').addClass("invisible").removeClass("invisible");
+        setTimeout(function () {
+            $('#message-status-failure').removeClass("invisible").addClass("invisible");
+        }, 3000);
+    }
 }

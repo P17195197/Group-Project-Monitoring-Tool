@@ -51,8 +51,8 @@ function onSendMessage() {
         success: function(data) {
             if(data === true){
                 showSuccessAlert();
-                $('#messagehistory').DataTable().destroy();
-                getMessages();
+                // $('#messagehistory').DataTable().destroy();
+                // getMessages();
             }else{
                 showFailureAlert();
             }

@@ -2,6 +2,9 @@
 function showSuccessAlert(){
     $("#message-status-failure").removeClass("visible").addClass("invisible");
     $("#message-status-success").addClass("visible").removeClass("invisible");
+    setTimeout(function () {
+        window.location.reload();
+    }, 3000);
 
 }
 

@@ -127,7 +127,7 @@ $user = check_auth ();
             </table>
         </div>
     </div>
-    <div id="dialog" title="Problem" class="modal-dialog">
+    <div id="dialog" title="Problem" class="modal-dialog hidden">
         <div class="statement">
             <h6 class="font-weight-bold">Problem Statement</h6>
             <div class="problem-statement">

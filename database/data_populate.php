@@ -65,6 +65,21 @@ switch ($functionname){
         $students = get_students ($class_id);
         echo json_encode ($students);
         break;
+    case 'enrol_in_class':
+        $student_id = $_POST['studentId'];
+        $class_id = $_POST['classId'];
+        $enrolled = enrol_in_class($student_id, $class_id);
+        echo json_encode ($enrolled);
+        break;
+    case 'get_all_users':
+        $users = get_all_users();
+        echo json_encode ($users);
+        break;
+    case 'change_user_status':
+        $user_id = $_POST['userId'];
+        $active_status = $_POST['activeStatus'];
+        echo json_encode (change_user_status($user_id, $active_status));
+        break;
     default:
         break;
 }
@@ -289,7 +304,14 @@ function get_articles(){
 function get_classes(){
     $classes = array();
     $conn = get_new_connection();
-    $sql = "SELECT * FROM classes";
+    $sql = "SELECT c.*,
+                        CASE
+                            WHEN e.id IS NULL THEN 0
+                            ELSE 1
+                        END AS enrolmentStatus
+            FROM classes c
+                LEFT JOIN enrolments e ON c.id = e.classId
+                AND studentId = " . $_SESSION["id"];
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
@@ -345,6 +367,7 @@ function get_students($class_id){
     $conn = get_new_connection();
     $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName FROM enrolments e
                 INNER JOIN user u ON u.id = e.studentId
+                                AND u.userRoleId = 3
             WHERE e.classId = " . $class_id;
 
     $result = mysqli_query($conn, $sql);
@@ -357,4 +380,54 @@ function get_students($class_id){
     }
     mysqli_close($conn);
     return $students;
+}
+
+function enrol_in_class($student_id, $class_id){
+    $conn = get_new_connection();
+    $sql = "INSERT INTO enrolments(studentId, classId, enrolledDate)
+            VALUES ("
+            . $student_id . ","
+            . $class_id . ","
+            . "'" . date('Y-m-d h:i:s') . "'"
+            . ")";
+
+    $inserted = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+
+    if($inserted != null){
+        return true;
+    }
+    return false;
+}
+
+function get_all_users(){
+    $users = array();
+    $conn = get_new_connection();
+    $sql = "SELECT u.id, u.username, u.firstName, u.lastName, u.onlineStatus, u.isActive, u.userRoleId, ur.roleName FROM user u
+                INNER JOIN userrole ur ON ur.id = u.userRoleId 
+            WHERE u.id <> " . $_SESSION['id'];
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $users[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $users;
+}
+
+function change_user_status($user_id, $active_status){
+    $conn = get_new_connection();
+    $sql = "UPDATE user SET isActive = " . $active_status ." WHERE id = " . $user_id . ";";
+
+    $updated = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+
+    if($updated != null){
+        return true;
+    }
+    return false;
 }

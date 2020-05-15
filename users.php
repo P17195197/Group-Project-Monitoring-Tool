@@ -9,6 +9,7 @@ $user = check_auth ();
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,42 +40,33 @@ $user = check_auth ();
     <input type="hidden" id="user-role" value="<?php echo $user["roleName"] ?>">
     <input type="hidden" id="user-id" value="<?php echo $user["id"] ?>">
     <div class="row p-5">
-        <div class="col-6">
-            <h4>Classes</h4>
-            <div class="classes-table">
-                <table id="classes-table" class="table table-striped table-bordered" style="width: 100%">
+        <div class="col-12">
+            <h4>Users</h4>
+            <div class="users-table">
+                <table id="users-table" class="table table-striped table-bordered" style="width: 100%">
                     <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Students</th>
-                        <th>Join</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="students-div hidden" id="student-div">
-                <h4>Students in <span id="class-name">Class</span></h4>
-                <table id="students-table" class="table table-striped table-bordered" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th>Student Name</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Online Status</th>
+                        <th>Active Status</th>
+                        <th>Id</th>
                     </tr>
                     </thead>
                 </table>
             </div>
             <div class="col-md-12 pt-2">
                 <div class="alert alert-success invisible" id="message-status-success">
-                    <strong>Success!</strong> You enrolled in the class.</a>.
+                    <strong>Success!</strong> Updated user status.</a>.
                 </div>
             </div>
             <div class="col-md-12 pt-2">
                 <div class="alert alert-danger invisible" id="message-status-failure">
-                    <strong>Failed!</strong> There was an error enrolling into the class. Please try later.
+                    <strong>Failed!</strong> Unable to update user status.
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -101,7 +93,7 @@ $user = check_auth ();
 <script src="./js/scrolling-nav.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/classes.js"></script>
+<script src="./js/users.js"></script>
 
 </body>
 </html>
