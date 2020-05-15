@@ -12,6 +12,9 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
+                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                          </li>
+                          <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
                           </li>
                             <li class="nav-item">
@@ -37,7 +40,19 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="' . $rootPath . '/logout.php">Logout</a>
+                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
+                          </li>
+                            <li class="nav-item">
+                              <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>
+                          </li>
+                            <li class="nav-item">
+                              <a class="nav-link js-scroll-trigger" href="./tests.php">Tests</a>
+                          </li>
+                            <li class="nav-item">
+                              <a class="nav-link js-scroll-trigger" href="./logout.php">Logout</a>
                           </li>
                         </ul>
                       </div>

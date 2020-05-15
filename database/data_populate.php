@@ -60,6 +60,11 @@ switch ($functionname){
         $choices = get_choices($problem_id);
         echo json_encode ($choices);
         break;
+    case 'get_students':
+        $class_id = $_POST['classId'];
+        $students = get_students ($class_id);
+        echo json_encode ($students);
+        break;
     default:
         break;
 }
@@ -284,7 +289,7 @@ function get_articles(){
 function get_classes(){
     $classes = array();
     $conn = get_new_connection();
-    $sql = "SELECT * FROM classes WHERE tutorId = " . $_SESSION["id"];
+    $sql = "SELECT * FROM classes";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
@@ -333,4 +338,23 @@ function get_choices($problem_id){
     }
     mysqli_close($conn);
     return $choices;
+}
+
+function get_students($class_id){
+    $students = array();
+    $conn = get_new_connection();
+    $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName FROM enrolments e
+                INNER JOIN user u ON u.id = e.studentId
+            WHERE e.classId = " . $class_id;
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $students[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $students;
 }
