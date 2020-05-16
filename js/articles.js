@@ -75,6 +75,11 @@ function renderArticles(articles){
     $("#article-render-author").html(defaultArticle["authorName"]);
     $("#article-render-time").html(dateFormatter(defaultArticle["createdDate"]));
     $("#article-render-content").html(defaultArticle["content"]);
+    articles.forEach(article => {
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let style = "8px solid #" + randomColor;
+        $('#article-item-' + article['id']).css("border-left", style);
+    })
 }
 
 function postArticle(){

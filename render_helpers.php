@@ -12,7 +12,7 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                              <a class="nav-link js-scroll-trigger" href="groups.php">Groups</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
@@ -40,7 +40,7 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                              <a class="nav-link js-scroll-trigger" href="groups.php">Groups</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
@@ -71,7 +71,7 @@ function render_navbar($user_role){
                               <a class="nav-link js-scroll-trigger" href="./users.php">Users</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                              <a class="nav-link js-scroll-trigger" href="groups.php">Groups</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./problems.php">Problems</a>
@@ -98,7 +98,7 @@ function render_navbar($user_role){
                       <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                           <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./classes.php">Classes</a>
+                              <a class="nav-link js-scroll-trigger" href="./groups.php">Groups</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>

@@ -39,13 +39,13 @@ $user = check_auth ();
     <input type="hidden" id="user-id" value="<?php echo $user["id"] ?>">
     <div class="row p-5">
         <div class="col-6">
-            <h4>Classes</h4>
+            <h4>Groups</h4>
             <div class="classes-table">
-                <table id="classes-table" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
+                <table id="classes-table" class="table table-striped table-bordered nowrap" style="width: 100%">
                     <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Students</th>
+                        <th>Group Name</th>
+                        <th>Members</th>
                         <th class="<?php echo $user[ "roleName" ] == 'System Admin' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">Join</th>
                     </tr>
                     </thead>
@@ -54,23 +54,23 @@ $user = check_auth ();
         </div>
         <div class="col-6">
             <div class="students-div hidden" id="student-div">
-                <h4>Students in <span id="class-name">Class</span></h4>
+                <h4>Members in <span id="class-name">Class</span></h4>
                 <table id="students-table" class="table table-striped table-bordered" style="width: 100%">
                     <thead>
                     <tr>
-                        <th>Student Name</th>
+                        <th>Name</th>
                     </tr>
                     </thead>
                 </table>
             </div>
             <div class="col-md-12 pt-2">
                 <div class="alert alert-success invisible" id="message-status-success">
-                    <strong>Success!</strong> You enrolled in the class.</a>.
+                    <strong>Success!</strong> You joined the group.</a>.
                 </div>
             </div>
             <div class="col-md-12 pt-2">
                 <div class="alert alert-danger invisible" id="message-status-failure">
-                    <strong>Failed!</strong> There was an error enrolling into the class. Please try later.
+                    <strong>Failed!</strong> There was an error joining the group. Please try later.
                 </div>
             </div>
 
@@ -100,7 +100,7 @@ $user = check_auth ();
 <script src="./js/scrolling-nav.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/classes.js"></script>
+<script src="js/groups.js"></script>
 
 </body>
 </html>

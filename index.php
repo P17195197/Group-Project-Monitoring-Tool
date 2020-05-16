@@ -31,7 +31,7 @@
                     // Now set the success message and re-direct them after 5 seconds to the dashboard
                     $msg = 'Successfully logged in. Re-directing you now...';
                     if($logged_in_user['roleName'] == 'Guest'){
-                        header('refresh:3;url=classes.php');
+                        header('refresh:3;url=groups.php');
                     }else{
                         header('refresh:3;url=dashboard.php');
                     }

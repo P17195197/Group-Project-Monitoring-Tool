@@ -45,10 +45,11 @@ function renderClasses(allClasses){
     classesTable.clear().destroy();
     classesTable = $('#classes-table').DataTable( {
         "data": allClasses,
+        "lengthChange": false,
         "columns": [
             { "data": "className" },
             { "data": "id", "render": function ( data, type, row ) {
-                    let studentsHtml = "<input type='button' class='btn btn-info show-students' value='Show Students'>";
+                    let studentsHtml = "<input type='button' class='btn btn-info show-students' value='Show Members'>";
                     return studentsHtml;
                 }
             },
@@ -80,6 +81,7 @@ function renderStudents(students){
     studentsTable.clear().destroy();
     studentsTable = $('#students-table').DataTable( {
         "data": students,
+        "lengthChange": false,
         "columns": [
             { "data": "userName" }
         ]

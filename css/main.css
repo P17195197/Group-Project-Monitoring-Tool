@@ -608,6 +608,7 @@ iframe {
 
 .article-title{
   border-bottom: 1px solid #ccc;
+  border-top: 8px solid #ddd;
   padding-bottom: 10px;
   padding-top: 40px;
 }
@@ -719,6 +720,18 @@ iframe {
   top: 0;
   right: 0;
   cursor: pointer;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  margin: 0px 0px 4px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+  width: 75px;
+  display: inline-block;
 }
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
