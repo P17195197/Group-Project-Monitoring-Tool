@@ -102,6 +102,7 @@ $user = check_auth ();
             </div>
         </div>
 
+        <div class="w-100 <?php echo $user[ "roleName" ] == 'Student' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">
         <div class="col-12 test-questions" id="test-questions">
 
         </div>
@@ -109,6 +110,7 @@ $user = check_auth ();
             <input type="button" id="add-question" class="btn btn-success btn-send disabled"
                    value="+ Add Problem">
             <input type="button" id="submit-form" class="btn btn-primary btn-send disabled" value="Submit">
+        </div>
         </div>
 
     </div>

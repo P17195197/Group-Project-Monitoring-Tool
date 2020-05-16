@@ -47,13 +47,6 @@ function formatTitle(text){
     return text;
 }
 
-function dateFormatter(strDate) {
-    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let current_datetime = new Date(strDate)
-    let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + ' | ' + current_datetime.toLocaleTimeString();
-    return formatted_date;
-}
-
 function renderArticles(articles){
     let articlesHtml = '';
     articles.forEach(article => {

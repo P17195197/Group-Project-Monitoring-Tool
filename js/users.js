@@ -19,12 +19,9 @@ function getUsers() {
 }
 
 function renderUsers(users){
-    let usersTable = $('#users-table').DataTable({
-        retrieve: true
-    });
+    let usersTable = $('#users-table').DataTable();
     usersTable.clear().destroy();
     usersTable = $('#users-table').DataTable( {
-        retrieve: true,
         "data": users,
         "columns": [
             { "data": "username" },
@@ -46,8 +43,7 @@ function renderUsers(users){
     } );
 
     usersTable.on('click', 'tr .user-status', function () {
-        console.log('closest row', usersTable.row(this).data());
-        let data = usersTable.row($(this).closest('tr')).data();
+        let data = $('#users-table').DataTable().row($(this).closest('tr')).data();
         changeUserStatus(data['id'], data['isActive'] === "1" ? "0" : "1");
     });
 }
@@ -72,17 +68,3 @@ function changeUserStatus(userId, activeStatus){
     });
 };
 
-
-function showMessage(data){
-    if(data){
-        $('#message-status-success').addClass("invisible").removeClass("invisible");
-        setTimeout(function () {
-            $('#message-status-success').removeClass("invisible").addClass("invisible");
-        }, 3000);
-    }else{
-        $('#message-status-failure').addClass("invisible").removeClass("invisible");
-        setTimeout(function () {
-            $('#message-status-failure').removeClass("invisible").addClass("invisible");
-        }, 3000);
-    }
-}

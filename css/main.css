@@ -427,7 +427,8 @@ iframe {
 }
 
 .container.article-publish{
-  margin-top: 2rem
+  margin-top: 2rem;
+  min-height: calc(80vh)
 }
 
 .hidden{
@@ -687,7 +688,7 @@ iframe {
 }
 
 .test-publish{
-  min-height: 600px;
+  min-height: calc(80vh)
 }
 
 .answer-radio{
@@ -712,6 +713,11 @@ iframe {
 .choices-list li{
   list-style-type: square;
 
+}
+.modal a.close-modal{
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/

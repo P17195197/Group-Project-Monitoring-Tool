@@ -18,7 +18,6 @@ $user = check_auth ();
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/scrolling-nav.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
-    <!--    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
     <link href="css/main.css" rel="stylesheet">
 </head>
 <style type="text/css">
@@ -42,12 +41,12 @@ $user = check_auth ();
         <div class="col-6">
             <h4>Classes</h4>
             <div class="classes-table">
-                <table id="classes-table" class="table table-striped table-bordered" style="width: 100%">
+                <table id="classes-table" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
                     <thead>
                     <tr>
                         <th>Class Name</th>
                         <th>Students</th>
-                        <th class="<?php echo $_SESSION["roleName"] == 'System Admin' || 'Guest' ? "invisible" : "" ?>">Join</th>
+                        <th class="<?php echo $user[ "roleName" ] == 'System Admin' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">Join</th>
                     </tr>
                     </thead>
                 </table>

@@ -3,6 +3,7 @@ let allClasses = [];
 
 $(document).ready(function(){
     getClasses();
+    getTests();
     $('#add-question').on('click', function(){
         testLength++;
         let questionTemplate = $('#test-question-template').html();
@@ -60,11 +61,19 @@ function addTests(tests){
         data: input,
         async: false,
         success: function(data) {
-            allClasses = data;
+            // allClasses = data;
+            showMessage(data);
+            setTimeout(function(){
+                window.location.reload();
+            }, 1000);
+
+
         }
 
     });
 }
+
+
 function getClasses(){
     let input = {
         function_name: 'get_classes'
@@ -80,4 +89,38 @@ function getClasses(){
         }
 
     });
+};
+
+function getTests(){
+    let input = {
+        function_name: 'get_tests'
+    };
+    $.ajax({    //create an ajax request to display.php
+        url: 'database/data_populate.php', //This is the current doc
+        type: "POST",
+        dataType:'json', // add json datatype to get json
+        data: (input),
+        async: false,
+        success: function(data) {
+            renderTests(data);
+        }
+
+    });
+}
+
+function renderTests(tests){
+    let testsTable = $('#tests-table').DataTable();
+    testsTable.clear().destroy();
+    testsTable = $('#tests-table').DataTable( {
+        "data": tests,
+        "columns": [
+            { "data": "testName" },
+            { "data": "className" },
+            { "data": "testDate", "render": function ( data, type, row ) {
+                    return dateFormatter(row["testDate"]);
+                } },
+            { "data": "duration" },
+            { "data": "topics" }
+        ]
+    } );
 }

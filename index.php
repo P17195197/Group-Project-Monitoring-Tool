@@ -20,13 +20,25 @@
 			    //Login failed
                 $msg = 'Invalid username/password combination.';
             }else{
-			    //Login successful
-                $_SESSION['user_id'] = $username;
-                $_SESSION['user'] = $logged_in_user;
-                $_SESSION['id'] = $logged_in_user['id'];
-                // Now set the success message and re-direct them after 5 seconds to the dashboard
-                $msg = 'Successfully logged in. Re-directing you now...';
-                header('refresh:3;url=dashboard.php');
+			    //check if active user
+                if($logged_in_user['isActive'] != 1){
+                    $msg = 'Your account is deactivated';
+                }else{
+                    //Login successful
+                    $_SESSION['user_id'] = $username;
+                    $_SESSION['user'] = $logged_in_user;
+                    $_SESSION['id'] = $logged_in_user['id'];
+                    // Now set the success message and re-direct them after 5 seconds to the dashboard
+                    $msg = 'Successfully logged in. Re-directing you now...';
+                    if($logged_in_user['roleName'] == 'Guest'){
+                        header('refresh:3;url=classes.php');
+                    }else{
+                        header('refresh:3;url=dashboard.php');
+                    }
+
+
+                }
+
             }
 		} else {
 			$msg = 'Please fill all fields.';

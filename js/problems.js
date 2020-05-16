@@ -120,7 +120,10 @@ function getAllProblems(classId){
                 "data": data,
                 "columns": [
                     { "data": "userName" },
-                    { "data": "postedDate" },
+                    { "data": "postedDate",
+                        "render": function ( data, type, row ) {
+                            return dateFormatter(row["postedDate"]);
+                        } },
                     { "data": "statement", "render": function ( data, type, row ) {
                             return data.length > 50 ? data.substr(0, 50) + '...': data;
                         }, },
@@ -134,8 +137,7 @@ function getAllProblems(classId){
             } );
 
             problemsTable.on('click', 'tr', function () {
-                let data = problemsTable.row( this ).data();
-                console.log('Clicked= on row', data);
+                let data = $('#problems-table').DataTable().row(this).data();
                 $('#problem-statement-dialog').html(data['statement']);
                 getChoices(data['id']);
                 $('#dialog').addClass("hidden").removeClass('hidden');

@@ -53,7 +53,7 @@ function renderClasses(allClasses){
                 }
             },
             { "data": "id",
-                "visible": $('#user-role').val() === 'System Admin' || 'Guest' ? false : true,
+                "visible": $('#user-role').val() === 'System Admin' || $('#user-role').val() === 'Guest' ? false : true,
                 "render": function ( data, type, row ) {
                     let enrolmentHtml = "<input type='button' class='btn btn-info enrol-in-class' value='Join'>";
                     return row['enrolmentStatus'] === '1' ? 'Joined' : enrolmentHtml;
@@ -63,7 +63,7 @@ function renderClasses(allClasses){
     } );
 
     classesTable.on('click', 'tr .show-students', function () {
-        let data = classesTable.row(  $(this).closest('tr') ).data();
+        let data = $('#classes-table').DataTable().row(  $(this).closest('tr') ).data();
         getStudents(data['id']);
         $('#class-name').html(data['className']);
         $('#student-div').addClass("hidden").removeClass("hidden");
@@ -103,18 +103,4 @@ function enrolInClass(studentId, classId){
             getStudents(classId);
         }
     });
-}
-
-function showMessage(data){
-    if(data){
-        $('#message-status-success').addClass("invisible").removeClass("invisible");
-        setTimeout(function () {
-            $('#message-status-success').removeClass("invisible").addClass("invisible");
-        }, 3000);
-    }else{
-        $('#message-status-failure').addClass("invisible").removeClass("invisible");
-        setTimeout(function () {
-            $('#message-status-failure').removeClass("invisible").addClass("invisible");
-        }, 3000);
-    }
 }

@@ -113,6 +113,34 @@ $user = check_auth ();
                    value="+ Add Test">
             <input type="button" id="submit-form" class="btn btn-primary btn-send disabled" value="Submit">
         </div>
+        <div class="col-md-12 pt-2">
+            <div class="alert alert-success hidden" id="message-status-success">
+                <strong>Success!</strong> Test added successfully. Refresh page now.</a>.
+            </div>
+        </div>
+        <div class="col-md-12 pt-2">
+            <div class="alert alert-danger hidden" id="message-status-failure">
+                <strong>Failed!</strong> There was an error adding the test. Please try later.
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row p-5">
+        <div class="col-12">
+            <h4>Scheduled tests</h4>
+            <table id="tests-table" class="table table-striped table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Class</th>
+                    <th>Scheduled for</th>
+                    <th>Duration</th>
+                    <th>Topics</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
 
     </div>
 

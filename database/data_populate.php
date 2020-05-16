@@ -80,6 +80,10 @@ switch ($functionname){
         $active_status = $_POST['activeStatus'];
         echo json_encode (change_user_status($user_id, $active_status));
         break;
+    case 'get_tests':
+        $tests = get_tests();
+        echo json_encode ($tests);
+        break;
     default:
         break;
 }
@@ -430,4 +434,22 @@ function change_user_status($user_id, $active_status){
         return true;
     }
     return false;
+}
+
+function get_tests(){
+    $tests = array();
+    $conn = get_new_connection();
+    $sql = "SELECT t.*, c.className FROM tests t
+							INNER JOIN classes c ON C.id = t.classId;";
+
+    $result = mysqli_query($conn, $sql);
+    if($result != null){
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $tests[] = $row;
+            }
+        }
+    }
+    mysqli_close($conn);
+    return $tests;
 }
