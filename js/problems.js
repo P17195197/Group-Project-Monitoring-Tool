@@ -1,4 +1,4 @@
-let testLength = 0;
+let projectLength = 0;
 let allGroups = [];
 
 $(document).ready(function(){
@@ -23,13 +23,13 @@ $(document).ready(function(){
 });
 
 function addProblem(){
-    testLength++;
+    projectLength++;
 
     let questionTemplate = $('#test-question-template').html();
-    $('#test-questions').append(questionTemplate.replace(/{problem-id}/g, testLength));
-    $('#add-topic-' + testLength).on('click', function () {
+    $('#test-questions').append(questionTemplate.replace(/{problem-id}/g, projectLength));
+    $('#add-topic-' + projectLength).on('click', function () {
         let closestDiv = $('#choices-' + this.id.replace('add-topic-', ''));
-        let choiceTemplate = $('#choice-template').html().replace(/{problem-id}/g, testLength);
+        let choiceTemplate = $('#choice-template').html().replace(/{problem-id}/g, projectLength);
         closestDiv.append(choiceTemplate);
     });
 
@@ -48,7 +48,7 @@ function submitForm(){
         problems: []
     };
     
-    for(let i = 1; i <= testLength; i++){
+    for(let i = 1; i <= projectLength; i++){
         let problem = {
             statement: '',
             choices: []

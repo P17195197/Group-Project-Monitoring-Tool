@@ -1,21 +1,21 @@
-let testLength = 0;
+let projectLength = 0;
 let allGroups = [];
 
 $(document).ready(function(){
     getGroups();
-    getTests();
+    getProjects();
     $('#add-question').on('click', function(){
-        testLength++;
+        projectLength++;
         let questionTemplate = $('#test-question-template').html();
-        $('#test-questions').append(questionTemplate.replace(/{test-id}/g, testLength));
-        $('#add-topic-' + testLength).on('click', function () {
+        $('#test-questions').append(questionTemplate.replace(/{test-id}/g, projectLength));
+        $('#add-topic-' + projectLength).on('click', function () {
             let closestDiv = $('#choices-' + this.id.replace('add-topic-', ''));
             let choiceTemplate = $('#choice-template').html();
             closestDiv.append(choiceTemplate);
         });
-        $('#test-class-' + testLength).html(mapGroupsToOptions());
-        $( "#test-date-" + testLength ).datepicker();
-        $( "#test-date-" + testLength ).datepicker('setDate', new Date());
+        $('#test-class-' + projectLength).html(mapGroupsToOptions());
+        $( "#test-date-" + projectLength ).datepicker();
+        $( "#test-date-" + projectLength ).datepicker('setDate', new Date());
     });
 
     $('#submit-form').on('click', function () {
@@ -32,27 +32,27 @@ function mapGroupsToOptions(){
     return optionsHtml;
 }
 function submitForm(){
-    let testObjects = [];
-    for(let i=1; i<=testLength; i++){
-        let testObj = {};
-        testObj.classId = $('#test-class-' + i).val();
-        testObj.testName = $('#test-add-test-' + i).val();
-        testObj.testDate = $('#test-date-' + i).val();
-        testObj.testDuration = $('#test-duration-' + i).val();
-        let topics = [];
+    let projectObjects = [];
+    for(let i=1; i<=projectLength; i++){
+        let projectObj = {};
+        projectObj.groupId = $('#test-class-' + i).val();
+        projectObj.projectName = $('#test-add-test-' + i).val();
+        projectObj.projectDate = $('#test-date-' + i).val();
+        projectObj.projectDuration = $('#test-duration-' + i).val();
+        let milestones = [];
         $('#choices-' + i + ' .answer-choice').map(function() {
-            topics.push(this.value);
+            milestones.push(this.value);
         });
-        testObj.topics = topics.toString();
-        testObjects.push(testObj);
+        projectObj.milestones = milestones.toString();
+        projectObjects.push(projectObj);
     };
-    addTests(testObjects);
+    addProjects(projectObjects);
 }
 
-function addTests(tests){
+function addProjects(projects){
     let input = {
-        function_name: 'add_tests',
-        tests: JSON.stringify(tests)
+        function_name: 'add_projects',
+        projects: JSON.stringify(projects)
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -91,9 +91,9 @@ function getGroups(){
     });
 };
 
-function getTests(){
+function getProjects(){
     let input = {
-        function_name: 'get_tests'
+        function_name: 'get_projects'
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -102,27 +102,27 @@ function getTests(){
         data: (input),
         async: false,
         success: function(data) {
-            renderTests(data);
+            renderProjects(data);
         }
 
     });
 }
 
-function renderTests(tests){
-    let testsTable = $('#tests-table').DataTable();
-    testsTable.clear().destroy();
-    testsTable = $('#tests-table').DataTable( {
-        "data": tests,
+function renderProjects(projects){
+    let projectsTable = $('#tests-table').DataTable();
+    projectsTable.clear().destroy();
+    projectsTable = $('#tests-table').DataTable( {
+        "data": projects,
         "columns": [
-            { "data": "testName" },
+            { "data": "projectName" },
             { "data": "groupName" },
-            { "data": "testDate", "render": function ( data, type, row ) {
-                    return dateFormatter(row["testDate"]);
+            { "data": "projectDate", "render": function ( data, type, row ) {
+                    return dateFormatter(row["projectDate"]);
                 } },
             { "data": "duration", "render": function ( data, type, row ) {
                     return row["duration"] + ' minutes';
                 } },
-            { "data": "topics" }
+            { "data": "milestones" }
         ]
     } );
 }

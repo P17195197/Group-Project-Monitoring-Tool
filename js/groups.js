@@ -23,10 +23,10 @@ function getGroups(){
     });
 };
 
-function getStudents(classId){
+function getStudents(groupId){
     let input = {
         function_name: 'get_students',
-        classId: classId
+        groupId: groupId
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -72,7 +72,7 @@ function renderGroups(allGroups){
 
     groupsTable.on('click', 'tr .enrol-in-class', function () {
         let data = groupsTable.row(  $(this).closest('tr') ).data();
-        enrolInClass($('#user-id').val(), data['id']);
+        enrolInGroup($('#user-id').val(), data['id']);
     });
 };
 
@@ -87,10 +87,10 @@ function renderStudents(students){
         ]
     } );
 }
-function enrolInClass(studentId, classId){
+function enrolInGroup(studentId, groupId){
     let input = {
-        function_name: 'enrol_in_class',
-        classId: classId,
+        function_name: 'enrol_in_group',
+        groupId: groupId,
         studentId: studentId
     };
     $.ajax({    //create an ajax request to display.php
@@ -102,7 +102,7 @@ function enrolInClass(studentId, classId){
         success: function(data) {
             showMessage(data);
             getGroups();
-            getStudents(classId);
+            getStudents(groupId);
         }
     });
 }

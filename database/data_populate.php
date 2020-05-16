@@ -39,10 +39,10 @@ switch ($functionname){
         $article = post_article ($title, $content);
         echo json_encode ($article);
         break;
-    case 'add_tests':
-        $tests = json_decode ($_POST['tests']);
-        $added_tests = add_tests($tests);
-        echo json_encode ($added_tests);
+    case 'add_projects':
+        $projects = json_decode ($_POST['projects']);
+        $added_projects = add_projects($projects);
+        echo json_encode ($added_projects);
         break;
     case 'add_problems':
         $problems = json_decode ($_POST['problems']);
@@ -50,8 +50,8 @@ switch ($functionname){
         echo json_encode ($added_problems);
         break;
     case 'get_problems':
-        $class_id = $_POST["classId"];
-        $all_problems = get_problems($class_id);
+        $group_id = $_POST["groupId"];
+        $all_problems = get_problems($group_id);
         echo json_encode ($all_problems);
         break;
     case 'get_choices':
@@ -60,14 +60,14 @@ switch ($functionname){
         echo json_encode ($choices);
         break;
     case 'get_students':
-        $class_id = $_POST['classId'];
-        $students = get_students ($class_id);
+        $group_id = $_POST['groupId'];
+        $students = get_students ($group_id);
         echo json_encode ($students);
         break;
-    case 'enrol_in_class':
+    case 'enrol_in_group':
         $student_id = $_POST['studentId'];
-        $class_id = $_POST['classId'];
-        $enrolled = enrol_in_class($student_id, $class_id);
+        $group_id = $_POST['groupId'];
+        $enrolled = enrol_in_group($student_id, $group_id);
         echo json_encode ($enrolled);
         break;
     case 'get_all_users':
@@ -79,9 +79,9 @@ switch ($functionname){
         $active_status = $_POST['activeStatus'];
         echo json_encode (change_user_status($user_id, $active_status));
         break;
-    case 'get_tests':
-        $tests = get_tests();
-        echo json_encode ($tests);
+    case 'get_projects':
+        $projects = get_projects();
+        echo json_encode ($projects);
         break;
     default:
         break;
@@ -175,16 +175,16 @@ function send_message($senderid, $receiverid, $subject, $content){
     return $message;
 }
 
-function add_tests($tests){
+function add_projects($projects){
     $conn = get_new_connection();
     $added = false;
-    foreach($tests as $test){
-        $sql = "INSERT INTO tests (testName, testDate, duration, classId, topics) VALUES("
-            . "'" . $test->testName . "',"
-            . "'" . date('Y-m-d',strtotime($test->testDate)) . "',"
-            . "'" . $test->testDuration . "',"
-            .  $test->classId . ","
-            . "'" . $test->topics . "'"
+    foreach($projects as $project){
+        $sql = "INSERT INTO projects (projectName, projectDate, duration, groupId, milestones) VALUES("
+            . "'" . $project->projectName . "',"
+            . "'" . date('Y-m-d',strtotime($project->projectDate)) . "',"
+            . "'" . $project->projectDuration . "',"
+            .  $project->groupId . ","
+            . "'" . $project->milestones . "'"
             . ")";
         $inserted = mysqli_query($conn, $sql);
         if($inserted != null){
@@ -204,9 +204,9 @@ function add_problems($problems){
     $added = false;
 
     foreach ($problems->problems as $problem){
-        $sql = "INSERT INTO problems(statement, classId, postedBy, postedDate) VALUES ("
+        $sql = "INSERT INTO problems(statement, groupId, postedBy, postedDate) VALUES ("
                 . "'" . $problem->statement . "',"
-                . $problems->classId . ","
+                . $problems->groupId . ","
                 . $_SESSION['id'] . ","
                 . "'" . date('Y-m-d h:i:s') ."'"
                 . ");";
@@ -308,7 +308,7 @@ function get_groups(){
                             ELSE 1
                         END AS enrolmentStatus
             FROM groups c
-                LEFT JOIN enrolments e ON c.id = e.classId
+                LEFT JOIN enrolments e ON c.id = e.groupId
                 AND studentId = " . $_SESSION["id"];
 
     $result = mysqli_query($conn, $sql);
@@ -323,13 +323,13 @@ function get_groups(){
     return $groups;
 }
 
-function get_problems($class_id){
+function get_problems($group_id){
     $problems = array();
     $conn = get_new_connection();
     $sql = "SELECT p.*, CONCAT(u.firstName, ' ', u.lastName) AS userName, c.groupName FROM problems p
                 INNER JOIN user u ON p.postedBy = u.id
-                INNER JOIN groups c ON c.id = p.classId
-            WHERE c.id = " . $class_id . ";";
+                INNER JOIN groups c ON c.id = p.groupId
+            WHERE c.id = " . $group_id . ";";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
@@ -360,12 +360,12 @@ function get_choices($problem_id){
     return $choices;
 }
 
-function get_students($class_id){
+function get_students($group_id){
     $students = array();
     $conn = get_new_connection();
     $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName FROM enrolments e
                 INNER JOIN user u ON u.id = e.studentId
-            WHERE e.classId = " . $class_id;
+            WHERE e.groupId = " . $group_id;
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
@@ -379,12 +379,12 @@ function get_students($class_id){
     return $students;
 }
 
-function enrol_in_class($student_id, $class_id){
+function enrol_in_group($student_id, $group_id){
     $conn = get_new_connection();
-    $sql = "INSERT INTO enrolments(studentId, classId, enrolledDate)
+    $sql = "INSERT INTO enrolments(studentId, groupId, enrolledDate)
             VALUES ("
             . $student_id . ","
-            . $class_id . ","
+            . $group_id . ","
             . "'" . date('Y-m-d h:i:s') . "'"
             . ")";
 
@@ -429,20 +429,20 @@ function change_user_status($user_id, $active_status){
     return false;
 }
 
-function get_tests(){
-    $tests = array();
+function get_projects(){
+    $projects = array();
     $conn = get_new_connection();
-    $sql = "SELECT t.*, c.groupName FROM tests t
-							INNER JOIN groups c ON C.id = t.classId;";
+    $sql = "SELECT t.*, c.groupName FROM projects t
+							INNER JOIN groups c ON C.id = t.groupId;";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){
         if (mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {
-                $tests[] = $row;
+                $projects[] = $row;
             }
         }
     }
     mysqli_close($conn);
-    return $tests;
+    return $projects;
 }
