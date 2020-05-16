@@ -32,14 +32,14 @@ $user = check_auth ();
         width: 100%;
     }
 </style>
-<body id="page-top">
+<body id="page-top" class="styled-bg">
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
 <div class="container article-publish">
     <input type="hidden" id="user-role" value="<?php echo $user["roleName"] ?>">
     <input type="hidden" id="user-id" value="<?php echo $user["id"] ?>">
-    <div class="row p-5">
+    <div class="row p-5 b-shadow">
         <div class="col-12">
             <h4>Users</h4>
             <div class="users-table">

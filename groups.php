@@ -30,7 +30,7 @@ $user = check_auth ();
         width: 100%;
     }
 </style>
-<body id="page-top">
+<body id="page-top" class="styled-bg">
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
@@ -39,21 +39,24 @@ $user = check_auth ();
     <input type="hidden" id="user-id" value="<?php echo $user["id"] ?>">
     <div class="row p-5">
         <div class="col-6">
-            <h4>Groups</h4>
-            <div class="classes-table">
-                <table id="classes-table" class="table table-striped table-bordered nowrap" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th>Group Name</th>
-                        <th>Members</th>
-                        <th class="<?php echo $user[ "roleName" ] == 'System Admin' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">Join</th>
-                    </tr>
-                    </thead>
-                </table>
+            <div class="b-shadow w-100 p-3">
+                <h4>Groups</h4>
+                <div class="classes-table">
+                    <table id="classes-table" class="table table-striped table-bordered nowrap" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th>Group Name</th>
+                            <th>Members</th>
+                            <th class="<?php echo $user[ "roleName" ] == 'System Admin' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">Join</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
+
         </div>
         <div class="col-6">
-            <div class="students-div hidden" id="student-div">
+            <div class="students-div hidden p-3 b-shadow" id="student-div">
                 <h4>Members in <span id="class-name">Class</span></h4>
                 <table id="students-table" class="table table-striped table-bordered" style="width: 100%">
                     <thead>

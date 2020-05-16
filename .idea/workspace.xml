@@ -3,10 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="8cf932a8-3fc8-4896-98ca-6fa1f72af3db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/data_populate.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/data_populate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/projects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render_helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/render_helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.php" beforeDir="false" afterPath="$PROJECT_DIR$/projects.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/articles.php" beforeDir="false" afterPath="$PROJECT_DIR$/articles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups.php" beforeDir="false" afterPath="$PROJECT_DIR$/groups.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/bodybg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/bodybg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/articles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/articles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problems.php" beforeDir="false" afterPath="$PROJECT_DIR$/problems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects.php" beforeDir="false" afterPath="$PROJECT_DIR$/projects.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +125,7 @@
       <workItem from="1589209484826" duration="6548000" />
       <workItem from="1589308113221" duration="7571000" />
       <workItem from="1589406573752" duration="12389000" />
-      <workItem from="1589563211049" duration="23562000" />
+      <workItem from="1589563211049" duration="28852000" />
     </task>
     <servers />
   </component>

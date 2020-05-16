@@ -32,7 +32,7 @@ $user = check_auth ();
         width: 100%;
     }
 </style>
-<body id="page-top">
+<body id="page-top" class="styled-bg">
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
@@ -54,7 +54,7 @@ $user = check_auth ();
         </div>
     </div>
 
-    <div class="row p-5  <?php if(($user["roleName"] != "Tutor") && ($user["roleName"] != "System Admin")) { echo "hidden"; } ?>">
+    <div class="row p-5 b-shadow  <?php if(($user["roleName"] != "Tutor") && ($user["roleName"] != "System Admin")) { echo "hidden"; } ?>">
 
         <div class="col-md-6 col-lg-6"><h4>Publish new article</h4>
             <form id="publish-article" name="publish-article" method="post" action="articles.php" role="form" novalidate="true">
@@ -87,12 +87,12 @@ $user = check_auth ();
                         </div>
 
                         <div class="col-md-12 pt-2">
-                            <div class="alert alert-success invisible" id="message-status-success">
+                            <div class="alert alert-success hidden" id="message-status-success">
                                 <strong>Success!</strong> Your article is posted. Refreshing the page now...</a>
                             </div>
                         </div>
                         <div class="col-md-12 pt-2">
-                            <div class="alert alert-danger invisible" id="message-status-failure">
+                            <div class="alert alert-danger hidden" id="message-status-failure">
                                 <strong>Failed!</strong> There was an error posting your article. Please try later.
                             </div>
                         </div>
@@ -103,7 +103,7 @@ $user = check_auth ();
             </form>
         </div>
         <div class="col-md-6 col-lg-6">
-            <h4 id="preview-text">Preview</h4>
+            <h4 id="preview-text" class="hidden preview-heading">Preview</h4>
             <div class="row">
                 <div class="col-md-12">
                     <h5 id="article-title-preview"></h5>
@@ -117,7 +117,7 @@ $user = check_auth ();
 
         </div>
     </div>
-    <div class="row p-5">
+    <div class="row p-5 b-shadow mb-5 mt-5">
         <div class="col-3">
             <div class="row" id="articles-list">
             </div>

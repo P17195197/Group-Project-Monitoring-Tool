@@ -519,13 +519,14 @@ iframe {
   border: 1px solid #dddddd;
   width: 100%;
   padding: 0;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
 .chat-box{
   padding: 0;
 }
 .write-message{
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  /*background: rgba(0, 0, 0, 0) none repeat scroll 0 0;*/
   border: medium none;
   color: #4c4c4c;
   font-size: 15px;
@@ -732,6 +733,39 @@ iframe {
 div.dataTables_wrapper div.dataTables_length select {
   width: 75px;
   display: inline-block;
+}
+
+.white-bg{
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0 2px 5px 0 #999;
+}
+
+.styled-bg{
+  background: url(../images/bodybg.jpg) no-repeat center center fixed ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.connect-img{
+  background: url(../images/bgimg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.b-shadow{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.preview-heading{
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  font-weight: bold;
 }
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/

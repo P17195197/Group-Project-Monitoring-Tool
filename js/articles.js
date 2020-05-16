@@ -2,9 +2,19 @@ $(document).ready(function () {
     getArticles();
     $('#article-title').keyup(function(event){
         $('#article-title-preview').text(this.value);
+        if($('#article-title-preview').text()){
+            $('#preview-text').addClass("hidden").removeClass("hidden")
+        }else{
+            $('#preview-text').removeClass("hidden").addClass("hidden")
+        }
     });
     $('#article-content').keyup(function(event){
         $('#article-content-preview').text(this.value);
+        if($('#article-content-preview').text()){
+            $('#preview-text').addClass("hidden").removeClass("hidden")
+        }else{
+            $('#preview-text').removeClass("hidden").addClass("hidden")
+        }
     });
     $('#post-article').click(function(){
         postArticle();

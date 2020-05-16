@@ -36,17 +36,17 @@ $user = check_auth ();
         width: 100%;
     }
 </style>
-<body id="page-top">
+<body id="page-top" class="styled-bg">
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
 <div class="container test-publish">
-    <div class="row p-5">
+    <div class="row p-5 b-shadow mb-5 mt-5">
         <div class="hidden" id="choice-template">
             <div class="row">
                 <div class="col-11">
                     <div class="test-add-answer">
-                        <input type="text" class="form-control answer-choice" placeholder="Type choice and select if it is correct..">
+                        <input type="text" class="form-control answer-choice" placeholder="Write tag here and select if it is main...">
                     </div>
                 </div>
                 <div class="col-1">
@@ -57,11 +57,15 @@ $user = check_auth ();
             </div>
         </div>
         <div class="row w-100 pt-5 pl-4">
+<div class="col-12">
+    <h4 class="mb-3">Stuck with a problem? Ask away and get help.</h4>
+
+</div>
             <div class="col-4">
                 <div class="form-group has-error has-danger">
-                    <label for="problem-class">Select class *</label>
-                    <select id="problem-class" name="problem-class" class="form-control" required="required" data-error="Please select a class.">
-                        <option value="" selected="" disabled="">Select Class</option>
+                    <label for="problem-class">Select group *</label>
+                    <select id="problem-class" name="problem-class" class="form-control" required="required" data-error="Please select a group.">
+                        <option value="" selected="" disabled="">Select group</option>
                     </select>
                 </div>
             </div>
@@ -69,7 +73,7 @@ $user = check_auth ();
         </div>
 
         <div id="test-question-template" class="test-question-template hidden">
-            <div class="col-md-12 col-lg-12 question-template" id="test-test-{problem-id}">
+            <div class="col-md-12 col-lg-12 question-template b-shadow" id="test-test-{problem-id}">
                 <div class="question">
                     <div class="form-group">
                         <label for="test-add-test">Problem {problem-id}*</label>
@@ -79,13 +83,13 @@ $user = check_auth ();
                     <div class="row">
                         <div class="col-3">
                             <input type="button" id="add-topic-{problem-id}" class="btn btn-success btn-send disabled add-choice"
-                                   value="+ Add Choice">
+                                   value="+ Add Tag">
                         </div>
                         <div class="col-9" class="test-question-choice" id="choices-{problem-id}">
                             <div class="row">
                                 <div class="col-11">
                                     <div class="test-add-answer">
-                                        <input type="text" class="form-control answer-choice" placeholder="Type choice and select if it is correct...">
+                                        <input type="text" class="form-control answer-choice" placeholder="Write tag here and select if it is main...">
 
                                     </div>
                                 </div>
@@ -102,7 +106,7 @@ $user = check_auth ();
             </div>
         </div>
 
-        <div class="w-100 <?php echo $user[ "roleName" ] == 'Student' || $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">
+        <div class="w-100 <?php echo $user[ "roleName" ] == 'Guest' ? "hidden" : "" ?>">
         <div class="col-12 test-questions" id="test-questions">
 
         </div>
@@ -115,7 +119,7 @@ $user = check_auth ();
 
     </div>
 
-    <div class="row p-5">
+    <div class="row p-5 b-shadow mb-5">
         <div class="col-md-12 col-lg-12"> <h4>Problems</h4>
             <table id="problems-table" class="table table-striped table-bordered" style="width:100%">
                 <thead>
@@ -137,7 +141,7 @@ $user = check_auth ();
             </div>
         </div>
         <div class="choices pt-5">
-            <h6 class="font-weight-bold">Choices</h6>
+            <h6 class="font-weight-bold">Tags</h6>
             <div class="answer-choices-dialog" id="answer-choices-dialog">
 
             </div>

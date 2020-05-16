@@ -35,12 +35,12 @@ $user = check_auth ();
         width: 100%;
     }
 </style>
-<body id="page-top">
+<body id="page-top" class="styled-bg">
 
 <?= render_navbar ( $user[ "roleName" ] ); ?>
 
 <div class="container test-publish">
-    <div class="row p-5">
+    <div class="row p-5 b-shadow <?php echo $user['roleName'] == 'System Admin' || $user['roleName'] == 'Tutor' ? "" : "hidden"?>">
         <div class="hidden" id="choice-template">
             <div class="row">
                 <div class="col-12">
@@ -52,7 +52,7 @@ $user = check_auth ();
             </div>
         </div>
         <div id="test-question-template" class="test-question-template hidden">
-            <div class="col-md-12 col-lg-12 question-template" id="test-test-{test-id}">
+            <div class="col-md-12 col-lg-12 question-template b-shadow" id="test-test-{test-id}">
                 <div class="question">
                     <div class="form-group">
                         <label for="test-add-test">Project {test-id}*</label>
@@ -126,9 +126,9 @@ $user = check_auth ();
 
 
     </div>
-    <div class="row p-5">
+    <div class="row p-5 p-t-6 mt-5 mb-5 b-shadow">
         <div class="col-12">
-            <h4>Scheduled projects</h4>
+            <h4 class="pt-4">Scheduled projects</h4>
             <table id="tests-table" class="table table-striped table-bordered" style="width: 100%">
                 <thead>
                 <tr>
