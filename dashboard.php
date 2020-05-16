@@ -144,9 +144,9 @@ $user = check_auth ();
         </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row p-3">
         <div class="col-md-6 col-lg-6"><h4>Want to start a conversation?</h4>
-            <form id="contact-students" method="post" action="messages.php" role="form" novalidate="true">
+            <form id="contact-students" role="form">
 
                 <div class="messages"></div>
 
@@ -201,7 +201,7 @@ $user = check_auth ();
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <input type="button" id="send-message" class="btn btn-success btn-send disabled"
+                            <input type="submit" id="send-message" class="btn btn-success btn-send disabled"
                                    value="Send message">
                         </div>
 

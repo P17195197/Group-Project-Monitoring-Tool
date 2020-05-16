@@ -120,7 +120,7 @@
                         </a>
                     </div>
 
-					<div class="result"><?php echo isset($_POST['doLogin']) ? $msg : ''; ?></div>
+					<div class="result text-white <?php echo $logged_in_user != null ? 'bg-success' : 'bg-danger'; ?>"><?php echo isset($_POST['doLogin']) ? $msg : ''; ?></div>
 
 				</form>
 			</div>

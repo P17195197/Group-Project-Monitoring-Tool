@@ -2,7 +2,8 @@ $('#receiverrole').on('change', function() {
     onReceiverRoleSelect();
 });
 
-$('#send-message').on('click', function() {
+$('#contact-students').on('submit', function(event) {
+    event.preventDefault();
     onSendMessage();
 });
 
@@ -51,8 +52,6 @@ function onSendMessage() {
         success: function(data) {
             if(data === true){
                 showSuccessAlert();
-                // $('#messagehistory').DataTable().destroy();
-                // getMessages();
             }else{
                 showFailureAlert();
             }
@@ -200,8 +199,9 @@ $(document).ready(function () {
     getContacts();
 
     $('#chat-send-message').on('click', function () {
-        console.log('Send message to', $('#selected-user').val());
-        sendChatMessage();
+        if($('#chat-message-input').val()) {
+            sendChatMessage();
+        }
     });
 
     refreshMessages();

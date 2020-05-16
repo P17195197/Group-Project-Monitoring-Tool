@@ -23,7 +23,6 @@ switch ($functionname){
         $content = $_POST['content'];
         $message = send_message($senderid, $receiverid, $subject, $content);
         echo json_encode($message);
-//        echo json_encode(print_r($message));
         break;
     case 'get_messages':
         $user_id = $_POST["user_id"];
@@ -156,15 +155,10 @@ function get_contacted_users(){
 function send_message($senderid, $receiverid, $subject, $content){
     $message = null;
     $conn = get_new_connection();
-    $sql = "INSERT INTO `university_platform`.`messages`
-            (`subject`,
-            `content`,
-            `sentTime`,
-            `senderId`,
-            `receiverId`)
+    $sql = "INSERT INTO messages (subject, content, sentTime, senderId, receiverId)
             VALUES("
-        . "'" . $subject . "',"
-        . "'" . $content . "',"
+        . "'" . mysqli_real_escape_string($conn, $subject) . "',"
+        . "'" . mysqli_real_escape_string($conn, $content) . "',"
         . "'" . date('Y-m-d h:i:s') . "',"
         .  $senderid . ","
         .  $receiverid
