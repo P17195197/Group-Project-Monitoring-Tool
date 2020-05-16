@@ -12,9 +12,9 @@ switch ($functionname){
         $contacts = get_contacted_users ();
         echo  json_encode ($contacts);
         break;
-    case 'get_classes':
-        $classes = get_classes();
-        echo json_encode ($classes);
+    case 'get_groups':
+        $groups = get_groups();
+        echo json_encode ($groups);
         break;
     case 'send_message':
         $senderid = $_SESSION['user']['id'];
@@ -299,15 +299,15 @@ function get_articles(){
     return $articles;
 }
 
-function get_classes(){
-    $classes = array();
+function get_groups(){
+    $groups = array();
     $conn = get_new_connection();
     $sql = "SELECT c.*,
                         CASE
                             WHEN e.id IS NULL THEN 0
                             ELSE 1
                         END AS enrolmentStatus
-            FROM classes c
+            FROM groups c
                 LEFT JOIN enrolments e ON c.id = e.classId
                 AND studentId = " . $_SESSION["id"];
 
@@ -315,20 +315,20 @@ function get_classes(){
     if($result != null){
         if (mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {
-                $classes[] = $row;
+                $groups[] = $row;
             }
         }
     }
     mysqli_close($conn);
-    return $classes;
+    return $groups;
 }
 
 function get_problems($class_id){
     $problems = array();
     $conn = get_new_connection();
-    $sql = "SELECT p.*, CONCAT(u.firstName, ' ', u.lastName) AS userName, c.className FROM problems p
+    $sql = "SELECT p.*, CONCAT(u.firstName, ' ', u.lastName) AS userName, c.groupName FROM problems p
                 INNER JOIN user u ON p.postedBy = u.id
-                INNER JOIN classes c ON c.id = p.classId
+                INNER JOIN groups c ON c.id = p.classId
             WHERE c.id = " . $class_id . ";";
 
     $result = mysqli_query($conn, $sql);
@@ -432,8 +432,8 @@ function change_user_status($user_id, $active_status){
 function get_tests(){
     $tests = array();
     $conn = get_new_connection();
-    $sql = "SELECT t.*, c.className FROM tests t
-							INNER JOIN classes c ON C.id = t.classId;";
+    $sql = "SELECT t.*, c.groupName FROM tests t
+							INNER JOIN groups c ON C.id = t.classId;";
 
     $result = mysqli_query($conn, $sql);
     if($result != null){

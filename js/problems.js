@@ -1,9 +1,9 @@
 let testLength = 0;
-let allClasses = [];
+let allGroups = [];
 
 $(document).ready(function(){
-    getClasses();
-    $('#problem-class').html(mapClassesToOptions());
+    getGroups();
+    $('#problem-class').html(mapGroupsToOptions());
     addProblem();
 
     $('#problem-class').on('change', function(){
@@ -35,10 +35,10 @@ function addProblem(){
 
 }
 
-function mapClassesToOptions(){
+function mapGroupsToOptions(){
     let optionsHtml = '';
-    allClasses.forEach(c => {
-        optionsHtml += `<option value="${c.id}">${c.className}</option>`;
+    allGroups.forEach(c => {
+        optionsHtml += `<option value="${c.id}">${c.groupName}</option>`;
     });
     return optionsHtml;
 }
@@ -78,15 +78,15 @@ function addProblems(problems){
         data: input,
         async: false,
         success: function(data) {
-            // allClasses = data;
+            // allGroups = data;
             console.log(data);
         }
 
     });
 }
-function getClasses(){
+function getGroups(){
     let input = {
-        function_name: 'get_classes'
+        function_name: 'get_groups'
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -95,7 +95,7 @@ function getClasses(){
         data: (input),
         async: false,
         success: function(data) {
-            allClasses = data;
+            allGroups = data;
         }
 
     });

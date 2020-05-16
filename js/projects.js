@@ -1,8 +1,8 @@
 let testLength = 0;
-let allClasses = [];
+let allGroups = [];
 
 $(document).ready(function(){
-    getClasses();
+    getGroups();
     getTests();
     $('#add-question').on('click', function(){
         testLength++;
@@ -13,7 +13,7 @@ $(document).ready(function(){
             let choiceTemplate = $('#choice-template').html();
             closestDiv.append(choiceTemplate);
         });
-        $('#test-class-' + testLength).html(mapClassesToOptions());
+        $('#test-class-' + testLength).html(mapGroupsToOptions());
         $( "#test-date-" + testLength ).datepicker();
         $( "#test-date-" + testLength ).datepicker('setDate', new Date());
     });
@@ -24,10 +24,10 @@ $(document).ready(function(){
 
 });
 
-function mapClassesToOptions(){
+function mapGroupsToOptions(){
     let optionsHtml = '';
-    allClasses.forEach(c => {
-        optionsHtml += `<option value="${c.id}">${c.className}</option>`;
+    allGroups.forEach(c => {
+        optionsHtml += `<option value="${c.id}">${c.groupName}</option>`;
     });
     return optionsHtml;
 }
@@ -61,7 +61,7 @@ function addTests(tests){
         data: input,
         async: false,
         success: function(data) {
-            // allClasses = data;
+            // allGroups = data;
             showMessage(data);
             setTimeout(function(){
                 window.location.reload();
@@ -74,9 +74,9 @@ function addTests(tests){
 }
 
 
-function getClasses(){
+function getGroups(){
     let input = {
-        function_name: 'get_classes'
+        function_name: 'get_groups'
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -85,7 +85,7 @@ function getClasses(){
         data: (input),
         async: false,
         success: function(data) {
-            allClasses = data;
+            allGroups = data;
         }
 
     });
@@ -115,7 +115,7 @@ function renderTests(tests){
         "data": tests,
         "columns": [
             { "data": "testName" },
-            { "data": "className" },
+            { "data": "groupName" },
             { "data": "testDate", "render": function ( data, type, row ) {
                     return dateFormatter(row["testDate"]);
                 } },

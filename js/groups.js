@@ -1,14 +1,14 @@
-let allClasses = [];
+let allGroups = [];
 
 $(document).ready(function(){
-    getClasses();
+    getGroups();
 
 });
 
 
-function getClasses(){
+function getGroups(){
     let input = {
-        function_name: 'get_classes'
+        function_name: 'get_groups'
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
@@ -17,8 +17,8 @@ function getClasses(){
         data: (input),
         async: false,
         success: function(data) {
-            allClasses = data;
-            renderClasses(allClasses);
+            allGroups = data;
+            renderGroups(allGroups);
         }
     });
 };
@@ -40,14 +40,14 @@ function getStudents(classId){
     });
 }
 
-function renderClasses(allClasses){
-    let classesTable = $('#classes-table').DataTable();
-    classesTable.clear().destroy();
-    classesTable = $('#classes-table').DataTable( {
-        "data": allClasses,
+function renderGroups(allGroups){
+    let groupsTable = $('#classes-table').DataTable();
+    groupsTable.clear().destroy();
+    groupsTable = $('#classes-table').DataTable( {
+        "data": allGroups,
         "lengthChange": false,
         "columns": [
-            { "data": "className" },
+            { "data": "groupName" },
             { "data": "id", "render": function ( data, type, row ) {
                     let studentsHtml = "<input type='button' class='btn btn-info show-students' value='Show Members'>";
                     return studentsHtml;
@@ -63,15 +63,15 @@ function renderClasses(allClasses){
         ]
     } );
 
-    classesTable.on('click', 'tr .show-students', function () {
+    groupsTable.on('click', 'tr .show-students', function () {
         let data = $('#classes-table').DataTable().row(  $(this).closest('tr') ).data();
         getStudents(data['id']);
-        $('#class-name').html(data['className']);
+        $('#class-name').html(data['groupName']);
         $('#student-div').addClass("hidden").removeClass("hidden");
     });
 
-    classesTable.on('click', 'tr .enrol-in-class', function () {
-        let data = classesTable.row(  $(this).closest('tr') ).data();
+    groupsTable.on('click', 'tr .enrol-in-class', function () {
+        let data = groupsTable.row(  $(this).closest('tr') ).data();
         enrolInClass($('#user-id').val(), data['id']);
     });
 };
@@ -101,7 +101,7 @@ function enrolInClass(studentId, classId){
         async: false,
         success: function(data) {
             showMessage(data);
-            getClasses();
+            getGroups();
             getStudents(classId);
         }
     });
