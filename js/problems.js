@@ -44,7 +44,7 @@ function mapGroupsToOptions(){
 }
 function submitForm(){
     let postObject = {
-        classId: $('#problem-class').val(),
+        groupId: $('#problem-class').val(),
         problems: []
     };
     
@@ -79,7 +79,10 @@ function addProblems(problems){
         async: false,
         success: function(data) {
             // allGroups = data;
-            console.log(data);
+            // console.log(data);
+            if(data){
+                window.location.reload();
+            }
         }
 
     });
@@ -101,10 +104,10 @@ function getGroups(){
     });
 }
 
-function getAllProblems(classId){
+function getAllProblems(groupId){
     let input = {
         function_name: 'get_problems',
-        classId: classId
+        groupId: groupId
     };
     $.ajax({    //create an ajax request to display.php
         url: 'database/data_populate.php', //This is the current doc
