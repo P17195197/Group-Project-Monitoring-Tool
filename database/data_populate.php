@@ -365,7 +365,6 @@ function get_students($class_id){
     $conn = get_new_connection();
     $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName FROM enrolments e
                 INNER JOIN user u ON u.id = e.studentId
-                                AND u.userRoleId = 3
             WHERE e.classId = " . $class_id;
 
     $result = mysqli_query($conn, $sql);

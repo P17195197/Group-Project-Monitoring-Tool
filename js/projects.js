@@ -119,7 +119,9 @@ function renderTests(tests){
             { "data": "testDate", "render": function ( data, type, row ) {
                     return dateFormatter(row["testDate"]);
                 } },
-            { "data": "duration" },
+            { "data": "duration", "render": function ( data, type, row ) {
+                    return row["duration"] + ' minutes';
+                } },
             { "data": "topics" }
         ]
     } );

@@ -45,7 +45,7 @@ $user = check_auth ();
             <div class="row">
                 <div class="col-12">
                     <div class="test-add-answer">
-                        <input type="text" class="form-control answer-choice" placeholder="Topic name...">
+                        <input type="text" class="form-control answer-choice" placeholder="Milestone name...">
                     </div>
                 </div>
 
@@ -55,23 +55,23 @@ $user = check_auth ();
             <div class="col-md-12 col-lg-12 question-template" id="test-test-{test-id}">
                 <div class="question">
                     <div class="form-group">
-                        <label for="test-add-test">Test {test-id}*</label>
-                        <input id="test-add-test-{test-id}" type="text" name="test-add-test" class="form-control" placeholder="What is the name of the test?" required="required" data-error="Need a valid name.">
+                        <label for="test-add-test">Project {test-id}*</label>
+                        <input id="test-add-test-{test-id}" type="text" name="test-add-test" class="form-control" placeholder="What is the name of the project?" required="required" data-error="Need a valid name.">
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group has-error has-danger">
-                                <label for="test-class-{test-id}">Which class is this test for? *</label>
-                                <select id="test-class-{test-id}" name="test-class-{test-id}" class="form-control" required="required" data-error="Please select a class.">
-                                    <option value="" selected="" disabled="">Select Class</option>
+                                <label for="test-class-{test-id}">Which group is this project for? *</label>
+                                <select id="test-class-{test-id}" name="test-class-{test-id}" class="form-control" required="required" data-error="Please select a group.">
+                                    <option value="" selected="" disabled="">Select Group</option>
                                 </select>
 
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group has-error has-danger">
-                                <label for="test-date-{test-id}">Test date? *</label>
+                                <label for="test-date-{test-id}">Submission date? *</label>
                                 <input type="text" id="test-date-{test-id}" name="test-date-{test-id}" class="form-control" required="required" data-error="Please select a date.">
 
                             </div>
@@ -79,7 +79,7 @@ $user = check_auth ();
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="test-duration-{test-id}">Duration *</label>
+                                <label for="test-duration-{test-id}">Demo duration *</label>
                                 <input id="test-duration-{test-id}" type="number" value="60" name="test-duration-{test-id}" class="form-control" placeholder="Duration is required *" required="required" data-error="Subject is required.">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -88,13 +88,13 @@ $user = check_auth ();
                     <div class="row">
                         <div class="col-3">
                             <input type="button" id="add-topic-{test-id}" class="btn btn-success btn-send disabled add-choice"
-                                   value="+ Add Topic">
+                                   value="+ Add Milestone">
                         </div>
                         <div class="col-9" class="test-question-choice" id="choices-{test-id}">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="test-add-answer">
-                                        <input type="text" class="form-control answer-choice" placeholder="Topic name...">
+                                        <input type="text" class="form-control answer-choice" placeholder="Milestone name...">
                                     </div>
                                 </div>
                             </div>
@@ -110,17 +110,17 @@ $user = check_auth ();
         </div>
         <div class="col-12 text-right">
             <input type="button" id="add-question" class="btn btn-success btn-send disabled"
-                   value="+ Add Test">
+                   value="+ Add Project">
             <input type="button" id="submit-form" class="btn btn-primary btn-send disabled" value="Submit">
         </div>
         <div class="col-md-12 pt-2">
             <div class="alert alert-success hidden" id="message-status-success">
-                <strong>Success!</strong> Test added successfully. Refresh page now.</a>.
+                <strong>Success!</strong> Projects added successfully. Refresh page now.</a>.
             </div>
         </div>
         <div class="col-md-12 pt-2">
             <div class="alert alert-danger hidden" id="message-status-failure">
-                <strong>Failed!</strong> There was an error adding the test. Please try later.
+                <strong>Failed!</strong> There was an error adding the projects. Please try later.
             </div>
         </div>
 
@@ -128,15 +128,15 @@ $user = check_auth ();
     </div>
     <div class="row p-5">
         <div class="col-12">
-            <h4>Scheduled tests</h4>
+            <h4>Scheduled projects</h4>
             <table id="tests-table" class="table table-striped table-bordered" style="width: 100%">
                 <thead>
                 <tr>
-                    <th>Test Name</th>
-                    <th>Class</th>
-                    <th>Scheduled for</th>
-                    <th>Duration</th>
-                    <th>Topics</th>
+                    <th>Project Name</th>
+                    <th>Group</th>
+                    <th>Submission Date</th>
+                    <th>Demo Duration</th>
+                    <th>Milestones</th>
                 </tr>
                 </thead>
             </table>
@@ -168,7 +168,7 @@ $user = check_auth ();
 <script src="./js/scrolling-nav.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/tests.js"></script>
+<script src="js/projects.js"></script>
 
 </body>
 </html>

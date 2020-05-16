@@ -21,7 +21,7 @@ function render_navbar($user_role){
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>
                           </li>
                             <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./tests.php">Tests</a>
+                              <a class="nav-link js-scroll-trigger" href="./projects.php">Projects</a>
                           </li>
                             <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./logout.php">Logout</a>
@@ -49,7 +49,7 @@ function render_navbar($user_role){
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>
                           </li>
                             <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./tests.php">Tests</a>
+                              <a class="nav-link js-scroll-trigger" href="./projects.php">Projects</a>
                           </li>
                             <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./logout.php">Logout</a>
@@ -80,7 +80,7 @@ function render_navbar($user_role){
                               <a class="nav-link js-scroll-trigger" href="./articles.php">Articles</a>
                           </li>
                             <li class="nav-item">
-                              <a class="nav-link js-scroll-trigger" href="./tests.php">Tests</a>
+                              <a class="nav-link js-scroll-trigger" href="./projects.php">Projects</a>
                           </li>
                             <li class="nav-item">
                               <a class="nav-link js-scroll-trigger" href="./logout.php">Logout</a>
