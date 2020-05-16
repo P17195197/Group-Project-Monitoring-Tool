@@ -65,7 +65,7 @@ if(isset($_POST['doRegister'])) {
 <style type="text/css">
     .result {
         margin-top: 5%;
-        padding: 5%;
+        /*padding: 5%;*/
         background: #eee;
         color: grey;
         text-align: center;
@@ -76,7 +76,7 @@ if(isset($_POST['doRegister'])) {
 
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
             <form method="POST" class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-51">
 						Register
@@ -135,6 +135,14 @@ if(isset($_POST['doRegister'])) {
                     <button name="doRegister" class="login100-form-btn">
                         Register
                     </button>
+                </div>
+                <div class="text-center mt-2">
+                        <span class="txt2">
+                        Already have an account?
+                        </span>
+                    <a href="index.php" class="txt1 hov1">
+                        Sign in
+                    </a>
                 </div>
 
                 <div class="result"><?php echo isset($_POST['doRegister']) ? $msg : ''; ?></div>
