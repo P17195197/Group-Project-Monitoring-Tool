@@ -119,7 +119,7 @@ function render_footer(){
     return '  <!-- Footer -->
               <footer class="py-5 bg-dark">
                 <div class="container">
-                  <p class="m-0 text-center text-white">Copyright &copy; Uni Project</p>
+                  <p class="m-0 text-center text-white">Copyright &copy; Group Project Monitoring Tool</p>
                 </div>
                 <!-- /.container -->
               </footer>

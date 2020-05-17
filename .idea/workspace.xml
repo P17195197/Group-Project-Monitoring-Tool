@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8cf932a8-3fc8-4896-98ca-6fa1f72af3db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/problems.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/problems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/data_populate.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/data_populate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render_helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/render_helpers.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +118,7 @@
       <workItem from="1589209484826" duration="6548000" />
       <workItem from="1589308113221" duration="7571000" />
       <workItem from="1589406573752" duration="12389000" />
-      <workItem from="1589563211049" duration="31165000" />
+      <workItem from="1589563211049" duration="34234000" />
     </task>
     <servers />
   </component>
@@ -181,10 +182,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="204" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1589167581408" />
-    <state x="477" y="265" key="NewPhpFileDialog" timestamp="1589572169276">
+    <state x="477" y="265" key="NewPhpFileDialog" timestamp="1589744280101">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="477" y="265" key="NewPhpFileDialog/0.0.1280.680@0.0.1280.680" timestamp="1589572169276" />
+    <state x="477" y="265" key="NewPhpFileDialog/0.0.1280.680@0.0.1280.680" timestamp="1589744280100" />
     <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1589563286945">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -213,10 +214,6 @@
           <url>file://$PROJECT_DIR$/database/chat_helpers.php</url>
           <line>3</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/database/data_populate.php</url>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

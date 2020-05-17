@@ -363,7 +363,7 @@ function get_choices($problem_id){
 function get_students($group_id){
     $students = array();
     $conn = get_new_connection();
-    $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName FROM enrolments e
+    $sql = "SELECT e.*, CONCAT(u.firstName, ' ', u.lastName) AS userName, u.emailAddress FROM enrolments e
                 INNER JOIN user u ON u.id = e.studentId
             WHERE e.groupId = " . $group_id;
 
@@ -445,4 +445,11 @@ function get_projects(){
     }
     mysqli_close($conn);
     return $projects;
+}
+
+function notify_group($group_id, $subject, $msg){
+    $members = get_students ($group_id);
+    foreach ($members as $member){
+        mail($member->emailAddress, $subject, $msg);
+    }
 }
