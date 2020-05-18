@@ -61,7 +61,7 @@ $user = check_auth ();
     <h4 class="mb-3">Stuck with a problem? Ask away and get help.</h4>
 
 </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group has-error has-danger">
                     <label for="problem-class">Select group *</label>
                     <select id="problem-class" name="problem-class" class="form-control" required="required" data-error="Please select a group.">
@@ -81,19 +81,19 @@ $user = check_auth ();
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <input type="button" id="add-topic-{problem-id}" class="btn btn-success btn-send disabled add-choice"
                                    value="+ Add Tag">
                         </div>
-                        <div class="col-9" class="test-question-choice" id="choices-{problem-id}">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" class="test-question-choice" id="choices-{problem-id}">
                             <div class="row">
-                                <div class="col-11">
+                                <div class="col-lg-11 col-md-10 col-sm-10 col-xs-8">
                                     <div class="test-add-answer">
                                         <input type="text" class="form-control answer-choice" placeholder="Write tag here and select if it is main...">
 
                                     </div>
                                 </div>
-                                <div class="col-1">
+                                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4">
                                     <input type="radio" name="correct-answer-{problem-id}" class="form-group answer-radio"
                                            checked="checked">
                                 </div>
@@ -121,16 +121,19 @@ $user = check_auth ();
 
     <div class="row p-5 b-shadow mb-5">
         <div class="col-md-12 col-lg-12"> <h4>Problems</h4>
-            <table id="problems-table" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Posted By</th>
-                    <th>Posted on</th>
-                    <th>Problem Statement</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table id="problems-table" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Posted By</th>
+                        <th>Posted on</th>
+                        <th>Problem Statement</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
     </div>
     <div id="dialog" title="Problem" class="modal-dialog hidden">

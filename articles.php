@@ -118,11 +118,11 @@ $user = check_auth ();
         </div>
     </div>
     <div class="row p-5 b-shadow mb-5 mt-5">
-        <div class="col-3">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="row" id="articles-list">
             </div>
         </div>
-        <div class="col-9" id="article-render">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="article-render">
             <h4 id="article-render-title" class="article-title"></h4>
             <div class="author-details">
                 <span class="author-name" id="article-render-author">

@@ -112,6 +112,7 @@ function renderProjects(projects){
     let projectsTable = $('#tests-table').DataTable();
     projectsTable.clear().destroy();
     projectsTable = $('#tests-table').DataTable( {
+        responsive: true,
         "data": projects,
         "columns": [
             { "data": "projectName" },

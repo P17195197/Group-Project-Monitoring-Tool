@@ -19,6 +19,7 @@ $user = check_auth ();
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/scrolling-nav.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
           rel = "stylesheet">
 
@@ -60,7 +61,7 @@ $user = check_auth ();
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="form-group has-error has-danger">
                                 <label for="test-class-{test-id}">Which group is this project for? *</label>
                                 <select id="test-class-{test-id}" name="test-class-{test-id}" class="form-control" required="required" data-error="Please select a group.">
@@ -69,7 +70,7 @@ $user = check_auth ();
 
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="form-group has-error has-danger">
                                 <label for="test-date-{test-id}">Submission date? *</label>
                                 <input type="text" id="test-date-{test-id}" name="test-date-{test-id}" class="form-control" required="required" data-error="Please select a date.">
@@ -77,7 +78,7 @@ $user = check_auth ();
                             </div>
 
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label for="test-duration-{test-id}">Demo duration *</label>
                                 <input id="test-duration-{test-id}" type="number" value="60" name="test-duration-{test-id}" class="form-control" placeholder="Duration is required *" required="required" data-error="Subject is required.">
@@ -86,13 +87,13 @@ $user = check_auth ();
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
                             <input type="button" id="add-topic-{test-id}" class="btn btn-success btn-send disabled add-choice"
                                    value="+ Add Milestone">
                         </div>
                         <div class="col-9" class="test-question-choice" id="choices-{test-id}">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
                                     <div class="test-add-answer">
                                         <input type="text" class="form-control answer-choice" placeholder="Milestone name...">
                                     </div>
@@ -127,19 +128,22 @@ $user = check_auth ();
 
     </div>
     <div class="row p-5 p-t-6 mt-5 mb-5 b-shadow">
-        <div class="col-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h4 class="pt-4">Scheduled projects</h4>
-            <table id="tests-table" class="table table-striped table-bordered" style="width: 100%">
-                <thead>
-                <tr>
-                    <th>Project Name</th>
-                    <th>Group</th>
-                    <th>Submission Date</th>
-                    <th>Demo Duration</th>
-                    <th>Milestones</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table id="tests-table" style="width: 100%" class="table table-striped table-bordered" >
+                    <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Group</th>
+                        <th>Submission Date</th>
+                        <th>Demo Duration</th>
+                        <th>Milestones</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
 
     </div>

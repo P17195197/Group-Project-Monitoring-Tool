@@ -770,3 +770,6 @@ div.dataTables_wrapper div.dataTables_length select {
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 
+.table-responsive {
+  overflow-x: auto;
+}

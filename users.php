@@ -42,7 +42,7 @@ $user = check_auth ();
     <div class="row p-5 b-shadow">
         <div class="col-12">
             <h4>Users</h4>
-            <div class="users-table">
+            <div class="users-table table-responsive">
                 <table id="users-table" class="table table-striped table-bordered" style="width: 100%">
                     <thead>
                     <tr>

@@ -18,6 +18,8 @@ $user = check_auth ();
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/scrolling-nav.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap.min.css" rel="stylesheet">
+
     <link href="css/main.css" rel="stylesheet">
 </head>
 <style type="text/css">
@@ -38,11 +40,13 @@ $user = check_auth ();
     <input type="hidden" id="user-role" value="<?php echo $user["roleName"] ?>">
     <input type="hidden" id="user-id" value="<?php echo $user["id"] ?>">
     <div class="row p-5">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="b-shadow w-100 p-3">
                 <h4>Groups</h4>
-                <div class="classes-table">
-                    <table id="classes-table" class="table table-striped table-bordered nowrap" style="width: 100%">
+                <div class="container-fluid">
+
+                <div class="classes-table table-responsive w-100">
+                    <table id="classes-table" class="table table-striped table-bordered nowrap">
                         <thead>
                         <tr>
                             <th>Group Name</th>
@@ -52,19 +56,25 @@ $user = check_auth ();
                         </thead>
                     </table>
                 </div>
+                </div>
             </div>
 
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="students-div hidden p-3 b-shadow" id="student-div">
                 <h4>Members in <span id="class-name">Class</span></h4>
-                <table id="students-table" class="table table-striped table-bordered" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                    </thead>
-                </table>
+                <div class="container-fluid">
+                <div class="table-responsive w-100">
+                    <table id="students-table"   class="table table-striped table-bordered dt-responsive no-wrap">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                </div>
+
             </div>
             <div class="col-md-12 pt-2">
                 <div class="alert alert-success invisible" id="message-status-success">
